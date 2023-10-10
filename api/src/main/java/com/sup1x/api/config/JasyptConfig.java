@@ -15,7 +15,7 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@PropertySource(value = "encrypted.properties") // load the encryption key from the properties file and use it to encrypt and decrypt data.
+@PropertySource(value = "dev.env") // load the encryption key from the properties file and use it to encrypt and decrypt data.
 @Configuration
 public class JasyptConfig {
 
@@ -23,7 +23,7 @@ public class JasyptConfig {
     public StringEncryptor stringEncryptor() {
 
         List<String> resultArray = new ArrayList<>();
-        String filePath = "src/main/resources/dev.env";
+        String filePath = "/Users/elyps/dev/repos/bastian-fischer.dev/api/src/main/resources/dev.env";
 
         String encryptionPassword = "ENC(t5CrgvlJCiWwmLIOUNRLmBcswCGee6O1)";
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();

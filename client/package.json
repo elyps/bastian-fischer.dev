@@ -4,7 +4,7 @@
   "main": "index.html",
   "scripts": {
     "ng": "ng",
-    "client": "ng serve",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
