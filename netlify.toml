@@ -8,24 +8,34 @@ image = "netlify/build:focal"
 
   # Build-Schritte
   command = """
-    apt-get update
-    apt-get upgrade -y
+    # Java 17 manuell installieren
+    sudo wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+    sudo tar xvzf jdk-17_linux-x64_bin.tar.gz -C /opt
 
-    apt install openjdk-17-jdk openjdk-17-jre -y
+    sudo export JAVA_HOME=/opt/jdk-17.0.2
+    sudo export PATH=$PATH:$JAVA_HOME/bin
 
+    # Java-Version anzeigen
+    echo $JAVA_HOME
     java -version
     
+    # Kompilieren oder andere Build-Schritte hier ausführen, falls erforderlich
     gradle clean
     gradle bootJar
 
+    # Kopiern Sie Ihre Jar-Datei in das Verzeichnis, das Sie in der Netlify-Konfiguration angegeben haben
     cp build/libs/bastian-fischer.dev-API-0.0.1-SNAPSHOT.jar ../dist/
 
+    # Wechseln Sie in das Verzeichnis, das Sie in der Netlify-Konfiguration angegeben haben
     cd ../dist/
 
+    # Erstellen Sie eine Procfile-Datei, die die Ausführung Ihrer Jar-Datei beschreibt
     echo "web: java -jar bastian-fischer.dev-API-0.0.1-SNAPSHOT.jar" > Procfile
 
+    # Erstellen Sie eine .profile-Datei, die die Umgebungseinstellungen für Java enthält
     echo "export JAVA_HOME=/opt/buildhome/jdk-17.0.1" > .profile
 
+    # Starten Sie Ihre Jar-Datei
     java -jar dist/bastian-fischer.dev-API-0.0.1-SNAPSHOT.jar
   """
 
