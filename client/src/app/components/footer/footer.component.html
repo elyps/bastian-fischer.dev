@@ -1,0 +1,60 @@
+<app-cookie-settings-modal></app-cookie-settings-modal>
+<footer class="py-4 footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="d-flex align-items-center">
+          <img src="assets/img/logo.png" alt="Firmenlogo" class="mr-3">
+          <div>
+            <h5 class="font-weight-bold">Über Mich</h5>
+            <p class="text-muted">Softwareentwickler, Open-Source-Enthusiast und Autor.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5 class="font-weight-bold">Kontakt</h5>
+        <address class="text-muted">
+          <strong>Bastian Fischer</strong><br>
+          Kiel, Schleswig-Holstein<br>
+          <abbr title="Email">Email:</abbr> kontakt(at)bastian-fischer(dot)dev
+        </address>
+      </div>
+      <div class="col-md-4">
+        <h5>Links</h5>
+        <ul class="d-flex list-unstyled">
+          <li class="mr-2"><a href="home">Home</a></li>
+          <li class="mr-2"><a href="about">Über mich</a></li>
+          <li class="mr-2"><a href="articles">Artikel</a></li>
+          <li class="mr-2"><a href="projects">Projekte</a></li>
+          <li class="mr-2"><a href="contact">Kontakt</a></li>
+        </ul>
+        <ul class="d-flex list-unstyled">
+          <li class="mr-2">
+            <a href="/recruiter" routerLink="/recruiter">Recruiter Portal</a>
+          </li>
+          <li class="mr-2">
+            <a href="/customer-portal" routerLink="/customer-portal">Kunden Portal</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="d-flex flex-column justify-content-center mx-auto p-3 bg-prime text-center text-white">
+  <span>
+    <a href="/privacy" routerLink="/privacy" class="text-white">Datenschutz</a>
+    &emsp;&emsp;•&emsp;&emsp;
+    <a href="/impress" routerLink="/impress" class="text-white">Impressum</a>
+  </span>
+  <span class="mt-2"><small>Entwickelt mit Java, Spring Boot und Angular.</small></span>
+  <span class="text-white-50 mt-2"><small>Copyright {{ year }} - Bastian Fischer.</small></span>
+</div>
+
+<span class="d-flex flex-row justify-content-between text-muted mt-2" style="font-size: small;">
+  <!-- <small>APP v{{ appVersion}} Build <app-version></app-version></small> -->
+  <small>CLIENT V{{ appVersion}}</small>
+  <!-- <small>COMMIT <app-git-info></app-git-info></small> -->
+  <!-- <small>API v{{ apiVersion }} Build <app-version></app-version></small> -->
+  <small>API V{{ apiVersion }}</small>
+</span>

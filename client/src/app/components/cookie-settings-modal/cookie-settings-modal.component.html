@@ -1,0 +1,105 @@
+<button class="cookie-btn btn btn-prime" (click)="openModal()">
+  Datenschutz Einstellungen
+</button>
+
+<div
+  class="cookie-settings-modal modal fade"
+  id="cookieSettingsModal"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex flex-column">
+          <h5 class="modal-title">Datenschutz Einstellungen</h5>
+          <p class="text-muted">Hier haben Sie die Möglichkeit ihre Datenschutz Einstellungen anzupassen.</p>
+        </div>
+        <button
+          type="button"
+          class="close text-muted"
+          data-dismiss="modal"
+          (click)="closeModal()"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="d-flex flex-row justify-content-between">
+          <span>Notwendige Cookies</span>
+
+        <!-- <span class="custom-control custom-switch">
+              <input title="customSwitch1" type="checkbox" class="custom-control-input" id="customSwitch1" (click)="toggleSwitch()">
+              <label class="custom-control-label mt-n4 float-right" for="customSwitch1" [class.active]="toggleStatus ? true : false"></label>
+            </span> -->
+        <div class="custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="mustHave-cookies"
+            [(ngModel)]="toggleStatusMustHave"
+            [class.active]="toggleStatusMustHave"
+            (click)="toggleSwitchMustHave()"
+          />
+          <label class="custom-control-label" for="mustHave-cookies"></label>
+        </div>
+        </span>
+
+        <hr>
+
+        <span class="d-flex flex-row justify-content-between">
+          <span>Marketing Cookies</span>
+
+        <!-- <span class="custom-control custom-switch">
+              <input title="customSwitch1" type="checkbox" class="custom-control-input" id="customSwitch1" (click)="toggleSwitch()">
+              <label class="custom-control-label mt-n4 float-right" for="customSwitch1" [class.active]="toggleStatus ? true : false"></label>
+            </span> -->
+        <div class="custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="marketing-cookies"
+            [(ngModel)]="toggleStatusMarketing"
+            [class.active]="toggleStatusMarketing"
+            (click)="toggleSwitchMarketing()"
+          />
+          <label class="custom-control-label" for="marketing-cookies"></label>
+        </div>
+        </span>
+
+        <hr>
+
+        <span class="d-flex flex-row justify-content-between">
+          <span>Analytics Cookies</span>
+
+        <!-- <span class="custom-control custom-switch">
+              <input title="customSwitch1" type="checkbox" class="custom-control-input" id="customSwitch1" (click)="toggleSwitch()">
+              <label class="custom-control-label mt-n4 float-right" for="customSwitch1" [class.active]="toggleStatus ? true : false"></label>
+            </span> -->
+        <div class="custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="analytics-cookies"
+            [(ngModel)]="toggleStatusAnalytics"
+            [class.active]="toggleStatusAnalytics"
+            (click)="toggleSwitchAnalytics()"
+          />
+          <label class="custom-control-label" for="analytics-cookies"></label>
+        </div>
+        </span>
+        <p class="mt-5 text-muted">Weitere Informationen finden Sie in meiner <a routerLink="/privacy">Datenschutzerklärung</a>.</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn-prime"
+          data-dismiss="modal"
+          (click)="closeModal()"
+        >
+          Schließen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

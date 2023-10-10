@@ -1,0 +1,132 @@
+<div class="container py-5">
+  <h2 class="h2 font-weight-bold">Kontakt</h2>
+  <p class="h5 text-muted pb-3">
+    Schreib mir eine Nachricht und ich werde mich so schnell wie möglich bei dir
+    melden.
+  </p>
+  <div class="card p-4 mt-5">
+    <div class="slider m-4">
+      <div class="slide" [class.active]="activeSlideIndex === 0">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <div class="d-flex flex-row">
+              <input
+                type="text"
+                class="form-control p-4"
+                id="name"
+                placeholder="Bitte geben Sie ihren Namen ein .."
+                formControlName="name"
+              />
+              <span class="d-flex flex-row justify-content-end">
+                <button class="btn btn-sm mt-2 mr-2 btn-warning position-absolute" (click)="clearNameInput()">
+                  Textfeld leeren
+                </button>
+              </span>
+            </div>
+            <div
+              *ngIf="
+                form.get('name')?.hasError('required') &&
+                form.get('name')?.touched
+              "
+              class="text-danger"
+            >
+              Name ist ein Pflichtfeld.
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-between">
+            <button class="btn btn-prime" (click)="nextSlide()">Weiter</button>
+          </div>
+        </form>
+      </div>
+      <div class="slide" [class.active]="activeSlideIndex === 1">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Bitte geben Sie ihre Email Adresse ein .."
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                form.get('email')?.hasError('required') &&
+                form.get('email')?.touched
+              "
+              class="text-danger"
+            >
+              Email ist ein Pflichtfeld.
+            </div>
+            <div
+              *ngIf="
+                form.get('email')?.hasError('email') &&
+                form.get('email')?.touched
+              "
+              class="text-danger"
+            >
+              Bitte geben sie eine gültige Email-Adresse ein.
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-between">
+            <div class="btn-group">
+              <button
+                class="btn btn-prime"
+                (click)="prevSlide()"
+                style="opacity: 0.8"
+              >
+                Zurück
+              </button>
+              <button class="btn btn-prime" (click)="nextSlide()">
+                Weiter
+              </button>
+            </div>
+            <button
+              class="btn btn-warning float-right"
+              (click)="clearEmailInput()"
+            >
+              Textfeld Email leeren
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="slide" [class.active]="activeSlideIndex === 2">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="message">Nachricht</label>
+            <textarea
+              class="form-control"
+              id="message"
+              rows="4"
+              placeholder="Bitte geben Sie ihre Nachricht ein .."
+              formControlName="message"
+              style="resize: none"
+            ></textarea>
+            <div
+              *ngIf="
+                form.get('message')?.hasError('required') &&
+                form.get('message')?.touched
+              "
+              class="text-danger"
+            >
+              Nachricht ist ein Pflichtfeld.
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-between">
+            <button class="btn btn-prime" (click)="prevSlide()">Zurück</button>
+            <div class="btn-group">
+              <button class="btn btn-warning" (click)="clearTextarea()">
+                Textfeld Nachricht leeren
+              </button>
+              <button class="btn btn-danger" (click)="clearForm()">
+                Alle Felder leeren
+              </button>
+            </div>
+            <button class="btn btn-success">Nachricht absenden</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

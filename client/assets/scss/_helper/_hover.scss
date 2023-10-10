@@ -1,0 +1,14 @@
+// hover
+/*.bg-prime:hover {
+  background-color: var(--hover-prime) !important;
+  color: #f1f1f1 !important;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}*/
+
+.hover-bg:hover {
+  background-color: var(--hover-prime) !important;
+  color: var(--text-color);
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}

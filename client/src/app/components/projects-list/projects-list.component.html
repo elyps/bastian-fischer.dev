@@ -1,0 +1,161 @@
+<div class="container py-5">
+  <h2 class="h2 font-weight-bold">Projekte</h2>
+  <p class="h5 text-muted pb-3">
+    Hier ist eine Liste von aufregenden Projekten an denen ich gearbeitet habe.
+  </p>
+  <div class="col-12 mt-5">
+    <div class="d-flex justify-content-center mb-3">
+      <div class="input-group w-75">
+        <input
+          type="text"
+          class="form-control border-radius-2 text-center mx-auto custom-input"
+          placeholder="Type a keyword to filter projects"
+          [(ngModel)]="title"
+          (keyup)="searchTitle()"
+        />
+        <!--<div class="input-group-append">
+            <button
+                    class="btn btn-outline-secondary border-radius-4 ml-2 btn-sm"
+                    type="button"
+                    (click)="searchTitle()"
+            >
+                Search
+            </button>
+        </div>-->
+      </div>
+    </div>
+
+    <!--   <div class="col-md-12 mx-auto d-flex justify-content-center">
+           <pagination-controls
+                   previousLabel="Prev"
+                   nextLabel="Next"
+                   [responsive]="true"
+                   (pageChange)="handlePageChange($event)"
+           ></pagination-controls>
+       </div>-->
+
+    <div class="col-12">
+      <div class="d-flex justify-content-end mb-3">
+        <!--<div class="input-group w-75">
+          <input
+            type="text"
+            class="form-control border-radius-2"
+            placeholder="Type a keyword to filter projects"
+            [(ngModel)]="title"
+            (keyup)="searchTitle()"
+          />
+          &lt;!&ndash;<div class="input-group-append">
+              <button
+                      class="btn btn-outline-secondary border-radius-4 ml-2 btn-sm"
+                      type="button"
+                      (click)="searchTitle()"
+              >
+                  Search
+              </button>
+          </div>&ndash;&gt;
+        </div>-->
+
+        <div class="my-3 border-radius-4">
+          <small>Items per page:</small>
+          <select
+            title="handlePageChange"
+            (change)="handlePageSizeChange($event)"
+            class="ml-1 pl-1 pr-1 pt-0 pb-0 border-radius-2"
+          >
+            <option *ngFor="let size of pageSizes" [ngValue]="size">
+              <small>{{ size }}</small>
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-md-4 mb-4"
+            *ngFor="
+              let project of projects
+                | paginate
+                  : {
+                      itemsPerPage: pageSize,
+                      currentPage: page,
+                      totalItems: count
+                    };
+              let i = index
+            "
+            [class.active]="i == currentIndex"
+            (click)="setActiveProject(project, i)"
+          >
+            <a routerLink="{{ project.slug }}">
+              <div class="card h-300px hover-bg border-radius-2 hover-prime">
+                <div class="card-body">
+                  <!-- <div class="text-center d-flex">
+                    <hr style="border: 1px solid #666; width: 100%" />
+                    <i
+                      class="bi bi-code-slash ml-4 mr-4 mt-1 font-weight-bold h4 text-muted"
+                    ></i>
+                    <hr style="border: 1px solid #666; width: 100%" />
+                  </div> -->
+                  <h5 class="card-title mt-4">{{ project.title }}</h5>
+                  <p class="card-text pt-2 text-muted">
+                    {{ project.description }}
+                  </p>
+                </div>
+
+                <small>
+                  <div class="text-center d-flex p-3">
+                    <hr style="border: 1px solid #666; width: 100%" />
+                    <i
+                      class="bi bi-code-slash ml-4 mr-4 mt-1 font-weight-bold h4 text-muted"
+                    ></i>
+                    <hr style="border: 1px solid #666; width: 100%" />
+                  </div>
+                  <!-- <div class="card-footer d-flex flex-row text-muted mt-n3">
+                    <span class="spacer"></span>
+                    <strong>&ensp;{{ project.author }} @ </strong>
+                    <strong>&ensp;{{ project.createdAt | date }}</strong>
+                  </div> -->
+                </small>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- <ul class="list-group border-0">
+        <li
+          class="card d-flex flex-row justify-content-start list-group-item hover-bg border-radius-2 hover-prime"
+          *ngFor="let project of projects | paginate : {
+                      itemsPerPage: pageSize,
+                      currentPage: page,
+                      totalItems: count
+                    };
+          let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveProject(project, i)"
+          routerLink="{{ project.slug }}"
+        >
+          <i class="bi bi-code-slash ml-2 mr-4"></i>
+          <span>{{ project.title }}</span>
+          <small class="ml-2">by <strong>{{ project.author }}</strong></small>
+          <small class="ml-2">on <strong>{{ project.createdAt | date }}</strong> </small>
+        </li>
+      </ul>
+ -->
+      <!--<button class="m-3 btn btn-sm btn-danger" (click)="removeAllprojects()">
+          Remove All
+      </button>-->
+    </div>
+
+    <div
+      class="col-12 d-flex flex-row justify-content-center mt-5 ngx-pagination"
+    >
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        [responsive]="true"
+        (pageChange)="handlePageChange($event)"
+      ></pagination-controls>
+    </div>
+  </div>
+</div>

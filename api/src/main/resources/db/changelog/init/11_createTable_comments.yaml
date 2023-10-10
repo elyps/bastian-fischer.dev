@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 11
+      author: Bastian Fischer
+      changes:
+        - createTable:
+            tableName: Comments
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: content
+                  type: VARCHAR(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment_author
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: article_id
+                  type: INT
+                  constraints:
+                    nullable: false
+#
+#  - changeSet:
+#      id: 11-1
+#      author: Bastian Fischer
+#      changes:
+#        - createSequence:
+#            sequenceName: comments_id_seq
+#
+#  - changeSet:
+#      id: 11-2
+#      author: Bastian Fischer
+#      changes:
+#        - sql:
+#            sql: ALTER TABLE Comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq')

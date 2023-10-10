@@ -1,0 +1,19 @@
+/* Add your custom slider styles here */
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.slider {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+}

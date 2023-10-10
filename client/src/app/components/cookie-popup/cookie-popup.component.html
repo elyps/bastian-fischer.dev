@@ -1,0 +1,69 @@
+<!-- cookie-popup.component.html -->
+<div class="cookie-modal modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 16 16"
+          >
+            <!-- Hintergrund braun -->
+            <circle cx="8" cy="8" r="7" fill="#b47d49" />
+
+            <!-- Punkte in Schwarz -->
+            <circle cx="5.5" cy="6.5" r="1.5" fill="black" />
+            <circle cx="11.5" cy="8" r="1.5" fill="black" />
+            <circle cx="9" cy="12.5" r="1.5" fill="black" />
+            <circle cx="4.5" cy="11" r="1.5" fill="black" />
+            <circle cx="9" cy="4" r="1.5" fill="black" />
+
+            <!-- Äußerer Ring in Braun -->
+            <circle
+              cx="8"
+              cy="8"
+              r="7"
+              fill="none"
+              stroke="#b47d49"
+              stroke-width="2"
+            />
+          </svg>
+
+          Kurz die Cookies, dann gehts weiter ...
+        </h5>
+      </div>
+      <div class="modal-body text-muted">
+        <p>
+          Wenn Sie auf „Alle Akzeptieren“ klicken, verarbeiten wir und Drittanbieter
+          Ihre personenbezogenen Daten und speichern Informationen (z.B. durch
+          Cookies) auf Ihrem Endgerät, bzw. greifen auf diese zu. Die
+          Verarbeitung erfolgt zur Analyse, Personalisierung und zur Ausspielung
+          von interessengerechter Werbung.
+          <br /><br />
+          Ihre Einwilligung umfasst gem. Art. 49 Abs. 1 lit. a DSGVO auch die
+          Übermittlung in Drittländer, bspw. in die USA. In diesem Fall ist es
+          möglich, dass Ihre Daten ohne richterlichen Beschluss durch lokale
+          Behörden innerhalb des jeweiligen Drittlandes verarbeitet werden.
+          <br /><br />
+          Mit Klick auf den Button „Datenschutz Einstellungen“, können Sie Details zur
+          Verarbeitung einsehen, Ihre Präferenzen einstellen sowie
+          einwilligungspflichtige Verarbeitungsvorgänge ablehnen. Sie können
+          Ihre Präferenzen jederzeit anpassen sowie Ihre Einwilligung
+          widerrufen, indem Sie die "Datenschutz-Einstellungen" oberhalb des
+          Footers am linken Bildschirmrand der Webseite aufrufen.
+          <br /><br />
+          Weitere Informationen finden Sie in unserer
+          <a href="/privacy" routerLink="privacy">Datenschutzerklärung</a> und
+          unserem <a href="/impress" routerLink="impress">Impressum</a>.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-prime" (click)="acceptCookies()">
+          Alle Akzeptieren
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

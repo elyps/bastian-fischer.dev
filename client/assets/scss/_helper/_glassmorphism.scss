@@ -1,0 +1,23 @@
+.gm-dark {
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  background-color: rgba(17, 25, 40, 0.75) !important;
+  //border-radius: 12px;
+  //border: 1px solid rgba(255, 255, 255, 0.125) !important;
+}
+
+.gm-light {
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  //border-radius: 12px;
+  //border: 1px solid rgba(209, 213, 219, 0.3) !important;
+}
+
+.gm-prime {
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  background-color: rgb(162, 125, 217) !important;
+  //border-radius: 12px;
+  //border: 1px solid rgb(137, 80, 222) !important;
+}

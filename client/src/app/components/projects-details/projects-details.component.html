@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3 mb-5">
+
+      <div *ngIf="currentProject.id">
+        <div class="d-flex flex-row justify-content-start mb-4">
+          <a class="btn btn-prime" routerLink="../">Zurück zur Übersicht</a>
+        </div>
+        <div class="card p-4">
+          <div class="border-radius-2 p-1">
+            <div class="-body border-radius-2">
+              <h4 class="btn-prime-ghost">{{ currentProject.category }}</h4>
+              <h1>{{ currentProject.title }}</h1>
+            </div>
+          </div>
+
+          <hr class="border-prime">
+
+          <div class="  border-radius-2 p-1 mt-2">
+            <div class="-body border-radius-2">
+              <div class="d-flex flex-row justify-content-around">
+                <label><small>Written by: <strong
+                  class="btn-prime-ghost">{{ currentProject.author }}</strong></small></label><br>
+                <label><small>Updated at: <strong
+                  class="btn-prime-ghost">{{ currentProject.updatedAt }}</strong></small></label>
+                <!--          <label><strong>&lt;!&ndash;Created: {{ currentProject.createdAt }} - &ndash;&gt;Updated: {{ currentProject.updatedAt }}</strong></label>-->
+              </div>
+            </div>
+          </div>
+
+          <hr class="border-prime">
+
+          <div class="  border-radius-2 p-1 mt-2">
+            <div class="-body  border-radius-2">
+              <h5>{{ currentProject.description }}</h5>
+            </div>
+          </div>
+
+          <div class="  border-radius-2 p-1 mt-5">
+            <div class="-body  border-radius-2">
+              <p>{{ currentProject.content }}</p>
+            </div>
+          </div>
+
+          <!--<div>
+            <label><strong>Category:</strong></label>
+            {{ currentProject.category }}
+          </div>-->
+
+          <!-- <div class="d-flex flex-row position-relative mx-auto my-5">
+          <span *ngFor="let tag of tags">
+            <a href="" class="badge badge-warning p-2 m-1">{{ tag.name }}</a>
+          </span>
+          </div> -->
+
+          <!--        <app-tags></app-tags>-->
+          <!--<div>
+            <label><strong>Tags:</strong></label>
+            {{ currentProject.tags }}
+          </div>-->
+          <!--<div>
+            <label><strong>Updated:</strong></label>
+            {{ currentProject.updatedAt }}
+          </div>-->
+          <!--<div>
+              <label><strong>Published:</strong></label>
+              {{ currentProject.published }}
+          </div>
+          -->
+          <div *ngIf="isLoggedIn" class="mt-4 d-flex flex-row justify-content-end">
+            <label><strong>Status:</strong></label>
+            <span class="btn-prime-ghost">&ensp;{{ currentProject.published ? "Published" : "Pending" }}</span>
+          </div>
+
+          <!--<div *ngIf="isLoggedIn">
+            <label><strong>Published:</strong></label>
+            <input
+              type="checkbox"
+              [(ngModel)]="currentProject.published"
+              (change)="updatePublished($event)"
+            />
+          </div>-->
+        </div>
+
+        <div class="mt-2 d-flex flex-row justify-content-end" *ngIf="isLoggedIn">
+          <a
+            class="btn btn-prime"
+            routerLink="/articles/{{ currentProject.id }}/edit"
+          >
+            Edit Project
+          </a>
+          <!-- <a
+            class="btn btn-danger"
+            (click)="deleteProject()"
+          >
+            Delete
+          </a> -->
+        </div>
+
+        <div *ngIf="commentsActivated; else commentsDeactivated;">
+          <app-comment></app-comment>
+        </div>
+
+        <ng-template #commentsDeactivated>
+          <div class="p-4 m-5 ">
+            <div class="card p-4 body">
+              <h5 class="btn-prime-ghost">Comments are closed.</h5>
+              <p>Comments are closed for this project.</p>
+            </div>
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!currentProject">
+    <br/>
+    <h1>400</h1>
+    <br>
+    <p>Sorry :-(<br><br>Something went wrong. Try it in a few minutes again...</p>
+  </div>
+</div>

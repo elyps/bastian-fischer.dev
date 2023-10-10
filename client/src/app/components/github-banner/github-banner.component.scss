@@ -1,0 +1,13 @@
+/* Stil für den GitHub-Banner */
+.github-banner {
+  position: fixed;
+  top: 315px;
+  right: -45px;
+  transform: translateY(-50%) rotate(35deg);
+  transform-origin: top right;
+  color: var(--text-color);
+  padding: 20px 74px;
+  z-index: 1000;
+  // border: 1px solid rgba(99, 27, 204, 0.64);
+  background-color: var(--background-color-ui);
+}

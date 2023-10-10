@@ -1,0 +1,11 @@
+input, textarea, select {
+  background-color: var(--background-color) !important;
+  color: var(--text-color-ui) !important;
+  border: none !important;
+}
+
+.custom-input {
+  background-color: var(--background-color-ui) !important;
+  color: var(--text-color-ui) !important;
+  border: none !important;
+}

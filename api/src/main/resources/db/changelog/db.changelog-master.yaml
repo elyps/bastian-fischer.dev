@@ -1,0 +1,82 @@
+databaseChangeLog:
+      #------------------
+      #-- CREATE TABLES
+      #------------------
+      - include:
+              file: init/01_createTable_roles.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/02_createTable_articles.yaml
+              relativeToChangelogFile: true
+      #  - include:
+      #      file: init/03_createTable_articles_tags.yaml
+      #      relativeToChangelogFile: true
+      - include:
+              file: init/04_createTable_articles_images.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/05_createTable_articles_languages.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/06_createTable_users.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/07_createTable_user_roles.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/08_createTable_cookie_consent.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/09_createTable_refresh_token.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/10_createTable_tags.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/11_createTable_comments.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/12_createTable_pins.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/13_createTable_build_info.yaml
+              relativeToChangelogFile: true
+      - include:
+              file: init/14_createTable_projects.yaml
+              relativeToChangelogFile: true
+      #------------------
+      #-- SQL INJECTIONS
+      #------------------
+      - include:
+              file: inject/01_createRoles.sql
+              relativeToChangelogFile: true
+      - include:
+              file: inject/02_createUsers.sql
+              relativeToChangelogFile: true
+      - include:
+              file: inject/03_createArticles.sql
+              relativeToChangelogFile: true
+      - include:
+              file: inject/04_addTagsToArticles.sql
+              relativeToChangelogFile: true
+      - include:
+              file: inject/05_addPins.sql
+              relativeToChangelogFile: true
+      - include:
+              file: inject/06_addProjects.sql
+              relativeToChangelogFile: true
+      - include:
+              file: inject/07_addBuildNumber.sql
+              relativeToChangelogFile: true
+#  - include:
+#      file: inject/03_createArticleTags.sql
+#      relativeToChangelogFile: true
+#  - include:
+#      file: inject/04_createArticleImages.sql
+#      relativeToChangelogFile: true
+#  - include:
+#      file: inject/06_createUserRoles.sql
+#      relativeToChangelogFile: true
+#  - include:
+#      file: inject/07_createUserImages.sql
+#      relativeToChangelogFile: true

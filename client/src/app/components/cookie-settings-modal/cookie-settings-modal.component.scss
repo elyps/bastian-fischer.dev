@@ -1,0 +1,79 @@
+.modal {
+  margin-top: 40%;
+  transform: translateY(-40%);
+  .modal-dialog {
+    min-width: 800px !important;
+    margin: auto;
+    .modal-content {
+      background-color: var(--background-color-ui);
+      color: var(--text-color);
+      .modal-header {
+        border-bottom: none;
+        .modal-title {
+          // font-size: 1.2rem;
+          font-weight: 600;
+          /*           .bi-cookie {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            color: rgb(12, 12, 12);
+            background: rgb(179, 92, 51);
+            border-radius: 100%;
+            background-size: 10%;
+          } */
+        }
+      }
+      .modal-body {
+        // font-size: 1rem;
+        font-weight: 400;
+      }
+      .modal-footer {
+        border-top: none;
+        .btn {
+          // font-size: 1rem;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+.cookie-btn {
+  position: fixed;
+  top: 70%;
+  transform: translateY(-70%);
+  left: 0;
+  margin: 0 0 0 -5.7rem;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in-out;
+  transform: rotate(-90deg);
+  &:hover {
+    opacity: 1 !important;
+    background-color: var(--prime) !important;
+  }
+}
+
+/* .custom-control-label {
+  color: var(--text-color);
+  position: relative;
+  left: 0 !important;
+} */
+
+/* input[type="checkbox"] {
+  position: absolute;
+  right: 0 !important;
+} */
+
+/* .soacer {
+  flex: 1 1 auto !important;
+} */
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: var(--prime);
+    background-color: var(--prime);
+}
+
+hr {
+  border: 1px solid var(--text-color-muted);
+  opacity: .2;
+}

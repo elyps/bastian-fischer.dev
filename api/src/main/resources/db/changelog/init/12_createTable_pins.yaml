@@ -1,0 +1,20 @@
+databaseChangeLog:
+    - changeSet:
+          id: 12
+          author: Bastian Fischer
+          changes:
+              - createTable:
+                    tableName: Pins
+                    columns:
+                        - column:
+                              name: id
+                              type: BIGINT
+                              autoIncrement: true
+                              constraints:
+                                  primaryKey: true
+                                  nullable: false
+                        - column:
+                              name: pin
+                              type: INT
+                              constraints:
+                                  nullable: false

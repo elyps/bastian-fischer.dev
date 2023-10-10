@@ -1,0 +1,133 @@
+<div>
+    <div class="submit-form">
+        <div *ngIf="!submitted">
+            <!-- Slug -->
+            <div class="form-group">
+                <label for="slug">Slug</label>
+                <input
+                        class="form-control"
+                        id="slug"
+                        required
+                        [(ngModel)]="article.slug"
+                        name="slug"
+                />
+            </div>
+
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        required
+                        [(ngModel)]="article.title"
+                        name="title"
+                />
+            </div>
+
+            <!-- Content -->
+            <div class="form-group">
+                <label for="content">Content</label>
+                <input
+                        class="form-control"
+                        id="content"
+                        required
+                        [(ngModel)]="article.content"
+                        name="content"
+                />
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input
+                        class="form-control"
+                        id="category"
+                        required
+                        [(ngModel)]="article.category"
+                        name="category"
+                />
+            </div>
+
+            <!-- Tags -->
+            <div class="form-group">
+                <label for="tags">Tags (comma-separated)</label>
+                <input
+                        class="form-control"
+                        id="tags"
+                        required
+                        [(ngModel)]="article.tags"
+                        name="tags"
+                />
+                <!-- Display existing tags as a comma-separated list -->
+                <!--<div *ngIf="article.tags && article.tags.length > 0" class="tags-preview">
+                    Existing Tags: {{ article.tags.join(', ') }}
+                </div>-->
+            </div>
+
+            <!-- Images -->
+            <div class="form-group">
+                <label for="images">Images (comma-separated URLs)</label>
+                <input
+                        class="form-control"
+                        id="images"
+                        required
+                        [(ngModel)]="article.images"
+                        name="images"
+                />
+                <!-- Display existing images as a comma-separated list -->
+                <!--<div *ngIf="article.images && article.images.length > 0" class="images-preview">
+                    Existing Images: {{ article.images.join(', ') }}
+                </div>-->
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input
+                        class="form-control"
+                        id="description"
+                        required
+                        [(ngModel)]="article.description"
+                        name="description"
+                />
+            </div>
+
+            <!-- URL -->
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input
+                        class="form-control"
+                        id="url"
+                        required
+                        [(ngModel)]="article.url"
+                        name="url"
+                />
+            </div>
+
+            <!-- Languages -->
+            <div class="form-group">
+                <label for="languages">Languages (comma-separated)</label>
+                <input
+                        class="form-control"
+                        id="languages"
+                        required
+                        [(ngModel)]="article.languages"
+                        name="languages"
+                />
+                <!-- Display existing languages as a comma-separated list -->
+                <!--<div *ngIf="article.languages && article.languages.length > 0" class="languages-preview">
+                    Existing Languages: {{ article.languages.join(', ') }}
+                </div>-->
+            </div>
+
+            <button (click)="saveArticle()" class="btn btn-success">Submit</button>
+        </div>
+
+        <div *ngIf="submitted">
+            <h4>Tutorial was submitted successfully!</h4>
+            <button class="btn btn-success" (click)="newArticle()">Add</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.4'
+    id 'io.spring.dependency-management' version '1.1.2'
+    id("com.github.dkorotych.gradle-maven-exec") version "3.0"
+
+}
+
+group = 'com.sup1x'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //--- MAIN
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //--- MAIL
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'jakarta.mail:jakarta.mail-api:2.1.2'
+    // implementation 'com.sun.mail:jakarta.mail:2.0.1'
+
+    //--- SECURITY / VALIDATION
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+
+    //--- OPENAPI / SWAGGER
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
+    //--- UTILS
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+//    implementation 'org.slf4j:slf4j-log4j12:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+
+    //--- SECURITY / AUTHENTICATION / JWT
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    implementation 'org.jasypt:jasypt:1.9.3'
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+//    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+//    implementation 'com.github.ulisesbocchio:jasypt-spring-boot:3.0.5'
+
+    //--- Monitoring
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    //--- GIT
+    implementation 'org.eclipse.jgit:org.eclipse.jgit:6.7.0.202309050840-r'
+    // implementation 'org.ajoberstar.grgit:org.ajoberstar.grgit.gradle.plugin:5.2.0'
+    // implementation 'org.springframework.boot:spring-boot-configuration-processor:3.1.4'
+    // id 'com.gorylenko.gradle-git-properties' version '2.2.2' // Das Git-Properties-Plugin
+
+    //--- REST API, eg. Github
+    // implementation 'org.springframework.boot:spring-boot-starter-data-rest:3.1.4'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'org.kohsuke:github-api:1.316'
+
+    //--- JSON
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+    //--- Environment Variables
+    // implementation 'org.webjars.npm:dotenv:16.0.3'
+    // implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+
+    //--- SESSION
+//    implementation 'org.springframework.session:spring-session-core'
+//    implementation 'org.springframework.session:spring-session-jdbc'
+
+    //--- LOGGING
+//    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+//    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.1'
+//    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+//    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
+
+    //--- DATABASE
+    implementation 'org.liquibase:liquibase-core:4.23.0'
+    runtimeOnly 'com.h2database:h2'
+    implementation 'org.postgresql:postgresql:42.6.0'
+    // implementation 'com.mysql:mysql-connector-j:8.1.0'
+    // implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+
+    //--- CACHE
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    //--- DEVELOPMENT
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    //--- TEST
+    implementation 'org.mockito:mockito-core:5.4.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.named('bootRun') {
+    systemProperty 'spring.profiles.active', 'dev'
+}
+
+tasks.named('bootBuildImage') {
+    imageName = 'sup1x/api'
+    builder = 'paketobuildpacks/builder:tiny'
+    environment = [
+            'BP_NATIVE_IMAGE': 'true',
+            'BP_NATIVE_IMAGE_BUILD_ARGUMENTS': '-Dspring.native.remove-yaml-support=true -Dspring.native.remove-xml-support=true -Dspring.native.remove-spel-support=true -Dspring.native.remove-jmx-support=true -Dspring.native.remove-cloud-foundry-support=true -Dspring.native.remove-liquibase-support=true -Dspring.native.remove-rsocket-support=true -Dspring.native.remove-actuator=true -Dspring.native.remove-security=true -Dspring.native.remove-validation=true -Dspring.native.remove-xml=true -Dspring.native.remove-jmx=true -Dspring.native.remove-groovy=true -Dspring.native.remove-kotlin=true -Dspring.native.remove-mongodb=true -Dspring.native.remove-jdbc=true -Dspring.native.remove-jcache=true -Dspring.native.remove-jms=true'
+    ]
+}
+
+task rebuild(type: MavenExec) {
+    goals 'clean', 'package'
+}
+
+/* // Konfiguriere das Git-Commit-ID-Plugin
+gitProperties {
+    // Stelle sicher, dass es bei jedem Build aktualisiert wird
+    version = '5.2.0'
+} */
+
+// gerrit {
+//     // Stelle sicher, dass es bei jedem Build aktualisiert wird
+//     version = '5.2.0'
+// }
+
+/* // adds a grgit property to the project (will silently be null if there's no git repo)
+tasks.register("describe") {
+  doFirst {
+        println grgit.describe()
+  }
+} */
+
+/* tasks.register("describe", DescribeTask, grgitService.service)
+
+class DescribeTask extends DefaultTask {
+    private final Provider<GrgitService> service
+
+    @Inject
+    DescribeTask(Provider<GrgitService> service) {
+        this.service = service
+        usesService(service)
+    }
+
+    @TaskAction
+    void execute() {
+        println service.get().grgit.describe()
+    }
+} */

@@ -1,0 +1,57 @@
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+
+li.list-group-item {
+  margin: 10px 0 !important;
+  height: 100px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 5px !important;
+  list-style: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Icon-Styling */
+li.list-group-item i {
+  font-size: 150%; /* Skaliert das Icon auf die Hälfte der Höhe der Karte */
+  margin-right: 10px; /* Beispielhaftes Padding, passe es nach Bedarf an */
+}
+
+/* Inhalt (Titel) der Karte */
+li.list-group-item span {
+  flex: 1; /* Nimmt den verfügbaren Platz ein, nachdem das Icon berücksichtigt wurde */
+}
+
+ul.spotify-meta {
+  list-style: none; /* Remove list markers completely */
+  margin-left: -2em; /* Push list inwards to compensate for marker */
+}
+
+/*
+ul.spotify-meta > li {
+  padding-left: 2em; !* Add space for the marker *!
+  position: relative; !* To make the pseudo-element work *!
+}
+
+ul.spotify-meta > li::before {
+  !* Add the marker using pseudo-element *!
+  content: "•";
+  position: absolute; !* Position the marker *!
+  left: 0; !* Position it at the left of the list item *!
+  top: 0;
+}*/
+
+ul.list-group {
+  list-style: none; /* Remove list markers completely */
+  margin-left: -2em; /* Push list inwards to compensate for marker */
+}
+
+ul.list-group li:hover {
+  background-color: #7d39e0 !important;
+  color: #f1f1f1 !important;
+}

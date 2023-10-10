@@ -1,0 +1,13 @@
+.dropdown-menu {
+  background-color: var(--background-color-ui);
+  color: var(--text-color) !important;
+}
+
+.dropdown-item {
+  color: var(--text-color) !important;
+}
+
+.dropdown-item:hover {
+  background-color: var(--background-color);
+  color: var(--text-color) !important;
+}

@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05
+      author: Bastian Fischer
+      changes:
+        - createTable:
+            tableName: article_languages
+            columns:
+                - column:
+                    name: article_id
+                    type: int
+                    constraints:
+                        nullable: false
+                - column:
+                    name: languages
+                    type: varchar(255)
+                    constraints:
+                        nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: article_languages
+            baseColumnNames: article_id
+            referencedTableName: article
+            referencedColumnNames: id
+            constraintName: fk_article_languages_article_id
+
+# SQL:
+#    CREATE TABLE article_languages (
+#    article_id INT,
+#    language VARCHAR(255),
+#    FOREIGN KEY (article_id) REFERENCES articles(id)
+#    );

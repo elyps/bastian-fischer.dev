@@ -1,0 +1,130 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+HELP.md
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Secure files
+*.key
+*.pem
+
+# Angular
+/dist
+/node_modules
+npm-debug.log
+yarn-error.log
+yarn.lock
+package-lock.json
+ng-yahoo-weather-app.iml
+
+# Environment
+*.env
+*.env.prod
+*.env.prod.local
+*.env.staging
+*.env.staging.local
+*.env.local
+*.env.development
+*.env.development.local
+*.env.test
+*.env.test.local
+
+/src/environments/environment.ts
+/src/environments/environment.prod.ts
+/src/environments/environment.staging.ts
+/src/environments/environment.test.ts
+/src/environments/environment.dev.ts
+
+!/src/main/resources/*.properties
+!/src/main/resources/application.properties
+/src/main/resources/application-staging.properties
+/src/main/resources/application-test.properties
+/src/main/resources/application-dev.properties
+/src/main/resources/application-prod.properties
+
+!/src/main/resources/*.yaml
+!/src/main/resources/application.yaml
+/src/main/resources/application.yaml
+/src/main/resources/application-staging.yaml
+/src/main/resources/application-test.yaml
+/src/main/resources/application-dev.yaml
+/src/main/resources/application-prod.yaml
+
+# Static Folder
+/src/main/resources/static
+
+# Backup Folder
+/backup
+
+# Database
+/data

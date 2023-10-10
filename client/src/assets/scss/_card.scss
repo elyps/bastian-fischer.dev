@@ -1,0 +1,14 @@
+.card {
+  background-color: var(--background-color-ui) !important;
+  color: var(--text-color) !important;
+  transition: all 0.3s ease-in-out;
+  border: none !important;
+  border-top: 2px solid var(--prime) !important;
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+li.card {
+  border: none !important;
+  border-top: 2px solid var(--prime) !important;
+}

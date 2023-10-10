@@ -1,0 +1,207 @@
+.btn-prime {
+  background-color: var(--prime) !important;
+  border-color: var(--prime) !important;
+  color: #fff !important;
+}
+
+.btn-prime:hover {
+  background-color: rgba(99, 27, 204, 0.64) !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime:focus {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime:active {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime:disabled {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime:not(:disabled):not(.disabled).active,
+.btn-prime:not(:disabled):not(.disabled):active,
+.show>.btn-prime.dropdown-toggle {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime:not(:disabled):not(.disabled).active:focus,
+.btn-prime:not(:disabled):not(.disabled):active:focus,
+.show>.btn-prime.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(137, 80, 222, 0.5) !important;
+}
+
+.btn-prime:not(:disabled):not(.disabled).active:hover,
+.btn-prime:not(:disabled):not(.disabled):active:hover,
+.show>.btn-prime.dropdown-toggle:hover {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime-outline {
+  background-color: transparent !important;
+  border-color: var(--prime) !important;
+  color: var(--prime) !important;
+}
+
+.btn-prime-outline:hover {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime-outline:focus {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime-outline:active {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime-outline:disabled {
+  background-color: transparent !important;
+  border-color: #8950de !important;
+  color: #8950de !important;
+}
+
+.btn-prime-outline:not(:disabled):not(.disabled).active,
+.btn-prime-outline:not(:disabled):not(.disabled):active,
+.show>.btn-prime-outline.dropdown-toggle {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime-outline:not(:disabled):not(.disabled).active:focus,
+.btn-prime-outline:not(:disabled):not(.disabled):active:focus,
+.show>.btn-prime-outline.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(137, 80, 222, 0.5) !important;
+}
+
+.btn-prime-outline:not(:disabled):not(.disabled).active:hover,
+.btn-prime-outline:not(:disabled):not(.disabled):active:hover,
+.show>.btn-prime-outline.dropdown-toggle:hover {
+  background-color: #8950de !important;
+  border-color: #8950de !important;
+  color: #fff !important;
+}
+
+.btn-prime-ghost {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: var(--prime) !important;
+}
+
+.btn-prime-ghost:hover {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost:focus {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost:active {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost:disabled {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost:not(:disabled):not(.disabled).active,
+.btn-prime-ghost:not(:disabled):not(.disabled):active,
+.show>.btn-prime-ghost.dropdown-toggle {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost:not(:disabled):not(.disabled).active:focus,
+.btn-prime-ghost:not(:disabled):not(.disabled):active:focus,
+.show>.btn-prime-ghost.dropdown-toggle:focus {
+  box-shadow: none !important;
+}
+
+.btn-prime-ghost:not(:disabled):not(.disabled).active:hover,
+.btn-prime-ghost:not(:disabled):not(.disabled):active:hover,
+.show>.btn-prime-ghost.dropdown-toggle:hover {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost-outline {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: var(--prime) !important;
+}
+
+.btn-prime-ghost-outline:hover {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost-outline:focus {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost-outline:active {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost-outline:disabled {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost-outline:not(:disabled):not(.disabled).active,
+.btn-prime-ghost-outline:not(:disabled):not(.disabled):active,
+.show>.btn-prime-ghost-outline.dropdown-toggle {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}
+
+.btn-prime-ghost-outline:not(:disabled):not(.disabled).active:focus,
+.btn-prime-ghost-outline:not(:disabled):not(.disabled):active:focus,
+.show>.btn-prime-ghost-outline.dropdown-toggle:focus {
+  box-shadow: none !important;
+}
+
+.btn-prime-ghost-outline:not(:disabled):not(.disabled).active:hover,
+.btn-prime-ghost-outline:not(:disabled):not(.disabled):active:hover,
+.show>.btn-prime-ghost-outline.dropdown-toggle:hover {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #8950de !important;
+}

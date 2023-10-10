@@ -1,0 +1,65 @@
+<div class="mt-5 w-75 d-flex flex-column justify-content-center mx-auto">
+  <h4>Comments</h4>
+
+  <div *ngIf="comments.length > 0; else noComments">
+    <div *ngFor="let comment of comments">
+      <div class="card mt-3">
+        <div class="card-body">
+          <div class="d-flex flex-row">
+            <p class="text-muted btn-prime-ghost">{{ comment.commentAuthor }}</p>
+            <span><small class="text-muted">&ensp;on {{ comment.createdAt }}</small></span>
+          </div>
+          <p class="card-text">{{ comment.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoggedIn; else notLoggedIn" class="my-5 w-100">
+
+    <div class="">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="font-weight-bold">Leave a Comment?</h5>
+          <p>Logged in as <strong class="btn-prime-ghost">{{ username }}</strong></p>
+
+          <!--<div class="form-group">
+            <label for="author">Author:</label>
+            <input type="text" id="author" class="form-control" [(ngModel)]="commentAuthor"
+                   placeholder="{{ username }}" value="{{ username }}" disabled/>
+          </div>-->
+
+          <div class="form-group mt-2">
+            <label for="comment-text">Leave your comment:</label>
+            <textarea type="text" id="comment-text" rows="7" class="form-control" [(ngModel)]="content"
+                      style="resize: none"></textarea>
+          </div>
+
+          <button class="btn btn-prime" (click)="onSubmit()">Add Comment</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #notLoggedIn>
+    <div class="card m-5 border-prime">
+      <div class="card-body">
+        <h5 class="font-weight-bold">Leave a Comment?</h5>
+        <p>Not logged in yet. Please log in to leave a comment.</p>
+      </div>
+    </div>
+  </ng-template>
+
+  <div *ngIf="errorMessage" class="error-message">
+
+  </div>
+
+  <ng-template #noComments>
+    <div class="card mt-3">
+      <div class="card-body">
+        <p class="card-text">No comments yet.</p>
+      </div>
+    </div>
+  </ng-template>
+</div>

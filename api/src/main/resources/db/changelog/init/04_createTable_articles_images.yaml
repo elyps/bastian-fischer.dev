@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 04
+      author: Bastian Fischer
+      changes:
+        - createTable:
+            tableName: article_images
+            columns:
+                - column:
+                    name: article_id
+                    type: int
+                    constraints:
+                        nullable: false
+                - column:
+                    name: images
+                    type: varchar(255)
+                    constraints:
+                        nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: article_images
+            baseColumnNames: article_id
+            referencedTableName: article
+            referencedColumnNames: id
+            constraintName: fk_article_images_article_id
+
+# SQL:
+#    CREATE TABLE article_images (
+#    article_id INT,
+#    image VARCHAR(255),
+#    FOREIGN KEY (article_id) REFERENCES articles(id)
+#    );

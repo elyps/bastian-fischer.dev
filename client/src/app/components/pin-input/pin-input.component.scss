@@ -1,0 +1,55 @@
+/* pin-entry.component.css */
+.pin-entry-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+form {
+  display: inline-flex;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--background-color-ui);
+}
+
+input[type="password"] {
+  width: 200px;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+button {
+  font-size: 16px;
+  padding: 5px 10px;
+  //background-color: var(--prime);
+  //color: #fff !important;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*button:hover {
+  opacity: 0.9;
+}*/
+
+/* pin-entry.component.css */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.success-message {
+  color: green;
+  font-size: 14px;
+  margin-top: 5px;
+}

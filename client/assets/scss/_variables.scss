@@ -1,0 +1,18 @@
+:root {
+  --prime: #7d39e0;
+  --background-color: #f1f1f1; /* Light Mode Background */
+  --text-color: #212121; /* Light Mode Text Color */
+  --text-color-muted: #414141; /* Light Mode Text Muted Color */
+  --background-color-ui: #fff; /* Light Mode UI Background */
+  --hover-prime: rgba(125, 57, 224, 0.64); /* Light Mode Hover */
+}
+
+/* Dark Mode */
+.dark-mode {
+  --prime: #7d39e0;
+  --background-color: #000000; /* Dark Mode Background */
+  --text-color: #d1d1d1; /* Dark Mode Text Color */
+  --text-color-muted: #a1a1a1; /* Light Mode Text Muted Color */
+  --background-color-ui: #202020; /* Dark Mode UI Background */
+  --hover-prime: rgba(125, 57, 224, 0.64); /* Dark Mode Hover */
+}

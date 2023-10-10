@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "jasypt.encryptor.encrypted.property",
+      "type": "java.lang.String",
+      "description": "Description for jasypt.encryptor.encrypted.property."
+  }
+] }

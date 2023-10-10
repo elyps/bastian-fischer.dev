@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 06
+      author: Bastian Fischer
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+                - column:
+                    name: id
+                    type: long
+                    autoIncrement: true
+                    constraints:
+                        primaryKey: true
+                        nullable: false
+                - column:
+                    name: username
+                    type: varchar(20)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: email
+                    type: varchar(50)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: password
+                    type: varchar(120)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: resettoken
+                    type: varchar(255)
+                    constraints:
+                        nullable: true
+#        - addUniqueConstraint:
+#            tableName: users
+#            columnNames: username
+#        - addUniqueConstraint:
+#            tableName: users
+#            columnNames: email
+
+
+# SQL:
+#    CREATE TABLE users (
+#    id INT PRIMARY KEY AUTO_INCREMENT,
+#    username VARCHAR(20) NOT NULL,
+#    email VARCHAR(50) NOT NULL,
+#    password VARCHAR(120) NOT NULL,
+#    reset_token VARCHAR(255)
+#    );

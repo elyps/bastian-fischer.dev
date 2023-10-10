@@ -1,0 +1,38 @@
+# Verwendete Build-Image
+image = "netlify/build:xenial"
+
+# Build-Phasen
+[build]
+  # Verzeichnis für den veröffentlichten Inhalt
+  publish = "dist"
+
+  # Build-Schritte
+  command = """
+    # Java 17 manuell installieren
+    wget https://download.java.net/java/GA/jdk17.0.1/96a7b8442fe84808a87ad72789e6ed29/1/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz
+    tar xzf openjdk-17.0.1_linux-x64_bin.tar.gz
+    export PATH=$PATH:$(pwd)/jdk-17.0.1/bin
+    
+    # Kompilieren oder andere Build-Schritte hier ausführen, falls erforderlich
+    gradle clean
+    gradle bootJar
+
+    # Kopiern Sie Ihre Jar-Datei in das Verzeichnis, das Sie in der Netlify-Konfiguration angegeben haben
+    cp build/libs/your-jar-file.jar dist/
+
+    # Wechseln Sie in das Verzeichnis, das Sie in der Netlify-Konfiguration angegeben haben
+    cd dist/
+
+    # Erstellen Sie eine Procfile-Datei, die die Ausführung Ihrer Jar-Datei beschreibt
+    echo "web: java -jar your-jar-file.jar" > Procfile
+
+    # Erstellen Sie eine .profile-Datei, die die Umgebungseinstellungen für Java enthält
+    echo "export JAVA_HOME=/opt/buildhome/jdk-17.0.1" > .profile
+
+    # Starten Sie Ihre Jar-Datei
+    java -jar path/to/your-jar-file.jar
+  """
+
+[build.environment]
+  # Umgebungseinstellung für Java
+  JAVA_HOME = "/opt/buildhome/jdk-17.0.1"

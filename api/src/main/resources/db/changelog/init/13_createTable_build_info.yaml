@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: init-13
+      author: Bastian Fischer
+      changes:
+        - createTable:
+            tableName: build_info
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: buildNumber
+                  type: INT
+                  constraints:
+                    nullable: false

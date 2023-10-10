@@ -1,0 +1,85 @@
+databaseChangeLog:
+  - changeSet:
+      id: 14
+      author: Bastian Fischer
+      changes:
+        - createTable:
+            tableName: project
+            columns:
+                - column:
+                    name: id
+                    type: int
+                    autoIncrement: true
+                    constraints:
+                        primaryKey: true
+                        nullable: false
+                - column:
+                    name: slug
+                    type: varchar(100)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: title
+                    type: varchar(200)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: content
+                    type: varchar(3000)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: author
+                    type: varchar(50)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: category
+                    type: varchar(50)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: description
+                    type: varchar(255)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: url
+                    type: varchar(100)
+                    constraints:
+                        nullable: false
+                - column:
+                    name: published
+                    type: boolean
+                    constraints:
+                        nullable: false
+                - column:
+                    name: created_at
+                    type: date
+                    constraints:
+                        nullable: false
+                - column:
+                    name: updated_at
+                    type: date
+                    constraints:
+                        nullable: false
+                # - column:
+                #     name: likes
+                #     type: int
+                #     defaultValue: 0
+
+# SQL:
+#        CREATE TABLE articles (
+#        id INT PRIMARY KEY AUTO_INCREMENT,
+#        slug VARCHAR(100) NOT NULL,
+#        title VARCHAR(100) NOT NULL,
+#        content TEXT NOT NULL,
+#        author VARCHAR(50) NOT NULL,
+#        category VARCHAR(50) NOT NULL,
+#        description VARCHAR(255) NOT NULL,
+#        url VARCHAR(100) NOT NULL,
+#        published BOOLEAN NOT NULL,
+#        created_at DATE NOT NULL,
+#        updated_at DATE NOT NULL,
+#        likes INT DEFAULT 0
+#        );

@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+//@import '~bootstrap/dist/css/bootstrap.css';
+
+// Base
+@import 'assets/scss/variables';
+@import 'assets/scss/background';
+
+// Helper
+@import 'assets/scss/_helper/global';
+@import 'assets/scss/_helper/glassmorphism';
+@import 'assets/scss/_helper/transform';
+@import 'assets/scss/_helper/radius';
+@import 'assets/scss/_helper/margin';
+@import 'assets/scss/_helper/height';
+@import 'assets/scss/_helper/width';
+@import 'assets/scss/_helper/hover';
+
+// Variables
+@import 'assets/scss/nav';
+@import 'assets/scss/links';
+@import 'assets/scss/card';
+@import 'assets/scss/text';
+@import 'assets/scss/list';
+@import 'assets/scss/border';
+@import 'assets/scss/form';
+@import 'assets/scss/button';
+@import 'assets/scss/dropdown';

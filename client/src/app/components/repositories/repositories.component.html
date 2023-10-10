@@ -1,0 +1,89 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-12 mb-4">
+      <h2 class="h2 font-weight-bold">Repositories</h2>
+      <p class="h5 text-muted">
+        Open-Source Repositories von einem Entwickler für viele Entwickler/-innen
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-5" *ngFor="let repo of repository">
+      <div class="card h-300px">
+        <div class="card-header p-2 bg-prime" style="height: 40px">
+          <!-- Dropdown trigger button -->
+          <button
+            class="btn btn-sm btn-link float-right"
+            type="button"
+            data-toggle="dropdown"
+            title="Dropdown menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="#fff"
+              class="bi bi-chevron-down mt-n1"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 1 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+              />
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <div class="dropdown-menu dropdown-menu-right mr-3">
+            <!-- Dropdown items go here -->
+            <a class="dropdown-item" href="#">Action 1</a>
+            <a class="dropdown-item" href="#">Action 2</a>
+          </div>
+          <p class="card-text text-white">
+            <small
+              ><span class="text-white font-weight-bold">ID:</span>
+              {{ repo.id }}</small
+            >
+          </p>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ repo.name }}</h4>
+          <p class="card-text text-muted">{{ repo.description }}</p>
+
+          <div
+            class="card-footer d-flex flex-row justify-content-between"
+            style="
+              bottom: 50px;
+              position: absolute;
+              width: 89%;
+              height: 40px;
+              background-color: transparent;
+              border-top: 1px solid rgba(125, 57, 224, 0.6);
+            "
+          >
+            <span class="card-text mr-2"
+              ><small
+                ><span class="text-muted">Language:</span>
+                </small
+              ></span
+            >
+            <span class="card-text mr-2"
+              ><small
+                ><span class="text-muted">Size:</span> {{ repo.size }} kb</small
+              ></span
+            >
+          </div>
+        </div>
+        <div>
+          <!-- href="{{ htmlUrl }}/{{ repo.name }}" -->
+          <a
+            routerLink="/repository/{{ repo.name }}"
+            class="btn btn-block btn-prime"
+            style="border-top-left-radius: 0; border-top-right-radius: 0"
+            >View Project</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- {{ repository | json }} -->

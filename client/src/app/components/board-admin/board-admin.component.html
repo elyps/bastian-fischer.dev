@@ -1,0 +1,22 @@
+<div class="container">
+  <header class="jumbotron bg-prime">
+    <h2>{{ content }}</h2>
+  </header>
+
+  <ul class="nav-item list-unstyled d-flex">
+    <li>
+      <!-- Your content here -->
+       <a routerLink="../add" class="btn btn-prime mr-2" *ngIf="showActions"
+      >Add New Article</a>
+    </li>
+    <li>
+      <a
+      href="javascript:void(0)"
+      (click)="retrieveRepositories()"
+      class="btn btn-prime mr-2"
+      *ngIf="showActions"
+      >Refresh Repositories</a>
+    </li>
+  </ul>
+
+</div>

@@ -1,0 +1,98 @@
+<div id="app">
+  <div class="top-container">
+
+    <div class="d-flex justify-content-between mx-auto px-3 bg-prime">
+      <span class=""><small>www.bastian-fischer.dev</small></span>
+      <span class=""></span>
+
+      <span class="">
+        <small class="mr-3"><a href="/recruiter" routerLink="/recruiter" class="text-white">Recruiter Portal</a></small>
+        &emsp;•&emsp;
+        <small class="mx-3"><a href="/customer-portal" routerLink="/customer-portal" class="text-white">Kunden Portal</a></small>
+      </span>
+      <!-- <span class=""><small>Project on your mind? <strong>kontakt(at)bastian-fischer(dot)com</strong></small></span> -->
+    </div>
+
+  </div>
+  <nav class="navbar navbar-expand shadow-sm fixed-top mt-4">
+    <img src="assets/img/logo.png" alt="Firmenlogo" class="mr-3" style="width: 35px; height: 35px;">
+    <a href="#" class="navbar-brand font-weight-bold">elyps.</a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="/about-me" class="nav-link" routerLink="about-me">Über mich</a>
+      </li>
+      <li class="nav-item">
+        <a href="/articles" class="nav-link" routerLink="articles" >Artikel</a>
+      </li>
+      <li class="nav-item">
+        <a href="/projects" class="nav-link" routerLink="projects">Projekte</a>
+      </li>
+      <li class="nav-item">
+        <a href="/repositories" class="nav-link" routerLink="repositories">Repositories</a>
+      </li>
+      <li class="nav-item">
+        <a href="/contact" class="nav-link" routerLink="contact">Kontakt</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <button (click)="toggleDarkMode()" title="Toggle Dark Mode" class="btn text-warning border-0 mt-1 mr-1">
+          <i [class]="darkMode ? 'bi-sun-fill' : 'bi-moon-fill'" class="h5"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register">Registrieren</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link" routerLink="login">Anmelden</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+
+      <li class="nav-item">
+        <button (click)="toggleDarkMode()" title="Toggle Dark Mode" class="btn text-warning border-0 mt-1 mr-1">
+          <i [class]="darkMode ? 'bi-sun-fill' : 'bi-moon-fill'" class="h5"></i>
+        </button>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          {{ username }}
+        </a>
+        <div class="dropdown-menu ml--5" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/profile" routerLink="profile">Profil</a>
+          <a class="dropdown-item" href="/settings">Einstellungen</a>
+          <a class="dropdown-item" href="/admin" routerLink="admin" *ngIf="showAdminBoard">Admin Board</a>
+          <a class="dropdown-item" href="/mod" routerLink="mod" *ngIf="showModeratorBoard">Moderator Board</a>
+          <a class="dropdown-item" href="/user" routerLink="user" *ngIf="isLoggedIn">User Board</a>
+          <div class="p-2">
+            <button type="button" class="btn btn-danger btn-block" (click)="logout()">Abmelden</button>
+          </div>
+
+        </div>
+      </li>
+
+    </ul>
+  </nav>
+
+  <div class="main-content mt-5"
+       [style.background-color]="darkMode ? 'var(--background-color)' : 'var(--background-color)'"
+       [style.color]="darkMode ? 'var(--text-color)' : 'var(--text-color)'">
+    <app-article-details></app-article-details>
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-footer></app-footer>
+
+
+</div>
+
+<app-cookie-popup></app-cookie-popup>
+
+

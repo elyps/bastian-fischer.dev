@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 08
+      author: Bastian Fischer
+      changes:
+        - createTable:
+            tableName: cookie_consents
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: consent
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false

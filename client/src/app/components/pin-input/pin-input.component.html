@@ -1,0 +1,27 @@
+<div class="pin-entry-container">
+  <h5 class="h5 pb-2">Bitte PIN eingeben</h5>
+  <form [formGroup]="pinForm" (ngSubmit)="validatePin()">
+
+      <input
+        type="password"
+        id="pin"
+        name="pin"
+        pattern="[0-9]{4}"
+        formControlName="pin"
+        placeholder="Enter your PIN"
+      />
+
+      <button type="submit" class="btn-prime">Validieren</button>
+
+      <!-- Error message for invalid PIN length -->
+      <div class="error-message" *ngIf="isInvalidPinLength">
+        PIN Falsch
+      </div>
+
+      <!-- Success message for valid PIN -->
+      <div class="success-message" *ngIf="isSuccessMessageVisible">
+        PIN erfolgreich validiert!
+      </div>
+
+  </form>
+</div>
