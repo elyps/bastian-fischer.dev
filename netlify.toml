@@ -9,17 +9,19 @@ image = "netlify/build:focal"
   # Build-Schritte
   command = """
     # Java 17 manuell installieren
-    wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-#    tar xzf jdk-17_linux-x64_bin.tar.gz
-    tar xvzf jdk-17_linux-x64_bin.tar.gz -C /opt
+#    wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+#    tar xvzf jdk-17_linux-x64_bin.tar.gz -C /opt
 
-    export JAVA_HOME=/opt/jdk-17.0.2
-    export PATH=$PATH:$JAVA_HOME/bin
+#    export JAVA_HOME=/opt/jdk-17.0.2
+#    export PATH=$PATH:$JAVA_HOME/bin
 
-#    export PATH=$PATH:$(pwd)/jdk-17.0.1/bin
+    apt-get update
+    apt-get upgrade -y
+
+    apt install openjdk-17-jdk openjdk-17-jre -y
 
     # Java-Version anzeigen
-    echo $JAVA_HOME
+#    echo $JAVA_HOME
     java -version
     
     # Kompilieren oder andere Build-Schritte hier ausführen, falls erforderlich
