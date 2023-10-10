@@ -29,19 +29,19 @@ image = "netlify/build:focal"
     gradle bootJar
 
     # Kopiern Sie Ihre Jar-Datei in das Verzeichnis, das Sie in der Netlify-Konfiguration angegeben haben
-    cp build/libs/your-jar-file.jar dist/
+    cp build/libs/bastian-fischer.dev-API-0.0.1-SNAPSHOT.jar ../dist/
 
     # Wechseln Sie in das Verzeichnis, das Sie in der Netlify-Konfiguration angegeben haben
-    cd dist/
+    cd ../dist/
 
     # Erstellen Sie eine Procfile-Datei, die die Ausführung Ihrer Jar-Datei beschreibt
-    echo "web: java -jar your-jar-file.jar" > Procfile
+    echo "web: java -jar bastian-fischer.dev-API-0.0.1-SNAPSHOT.jar" > Procfile
 
     # Erstellen Sie eine .profile-Datei, die die Umgebungseinstellungen für Java enthält
     echo "export JAVA_HOME=/opt/buildhome/jdk-17.0.1" > .profile
 
     # Starten Sie Ihre Jar-Datei
-    java -jar path/to/your-jar-file.jar
+    java -jar dist/bastian-fischer.dev-API-0.0.1-SNAPSHOT.jar
   """
 
 [build.environment]
