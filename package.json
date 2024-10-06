@@ -2,13 +2,22 @@
   "name": "bastian-fischer.dev",
   "version": "1.0.0",
   "private": true,
-  "description": "bastian-fischer.dev",
+  "description": "bastian-fischer.dev - Personal Homepage of Bastian Fischer",
   "author": "Bastian Fischer",
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "react",
+    "personal-website",
+    "portfolio",
+    "blog",
+    "developer",
+    "web-development",
+    "bastian-fischer.dev",
+    "bastian-fischer"
   ],
   "scripts": {
     "develop": "gatsby develop",
+    "dev": "gatsby develop --host=0.0.0.0",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
