@@ -8,11 +8,6 @@ const UnderConstruction = () => (
     <p style={styles.paragraph}>
       Wir arbeiten fleißig daran, unsere Website zu verbessern. Schau bald wieder vorbei!
     </p>
-    <img 
-      src="https://via.placeholder.com/400x300?text=Under+Construction" 
-      alt="Seite im Umbau"
-      style={styles.image}
-    />
   </div>
 );
 
