@@ -6,5 +6,8 @@ module.exports = {
     title: `bastian-fischer.dev`,
     siteUrl: `https://www.bastian-fischer.dev`,
   },
-  plugins: [],
+  plugins: [
+      "gatsby-plugin-image",
+      "gatsby-plugin-sharp"
+  ],
 }
