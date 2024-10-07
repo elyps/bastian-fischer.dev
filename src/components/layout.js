@@ -7,7 +7,7 @@ import {
 	navLinkItem,
 	navLinkText,
 	siteTitle,
-} from '../stylesheets/layout.module.css'
+} from '../styles/layout.module.css'
 
 const Layout = ({ pageTitle, children }) => {
 
