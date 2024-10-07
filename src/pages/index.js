@@ -11,6 +11,8 @@ const UnderConstruction = () => (
   </div>
 );
 
+export const Head = () => <title>Under Construction</title>
+
 const styles = {
   container: {
     display: 'flex',
