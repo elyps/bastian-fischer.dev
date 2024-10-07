@@ -1,6 +1,7 @@
 # bastian-fischer.dev - Personal Homepage
 
 **Version: 1.0.0**
+
 **License: MIT**
 
 ### 🚀 Development
@@ -19,7 +20,8 @@
 
     The site is now running at http://localhost:8000!
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+
+    **Edit sources to see your site update in real-time!**
 
 
 ### Dependencies
