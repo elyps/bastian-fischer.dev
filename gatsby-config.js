@@ -9,7 +9,7 @@ module.exports = {
 	plugins: [
 		"gatsby-plugin-image",
 		"gatsby-plugin-sharp",
-		"gatsby-transformer-sharp",  // Füge dies hinzu
+		"gatsby-transformer-sharp",
 		{
 			resolve: "gatsby-source-filesystem",
 			options: {
@@ -18,7 +18,17 @@ module.exports = {
 			}
 		},
 		"gatsby-plugin-mdx",
-		"gatsby-plugin-sass",
+		{
+			resolve: `gatsby-plugin-sass`,
+			options: {
+				cssLoaderOptions: {
+					esModule: false,
+					modules: {
+						namedExport: false,
+					},
+				},
+			},
+		},
 		"gatsby-transformer-remark"
 	],
 }

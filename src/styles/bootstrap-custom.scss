@@ -1,15 +1,15 @@
 // src/styles/bootstrap-custom.scss
 
-// Beispiel für die Anpassung einer Bootstrap-Variable
-$primary: #ff5733;
+
 
 // Bootstrap's variables file before importing the library allows overriding
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 
-// Restliche Bootstrap-Komponenten importieren
-@import "node_modules/bootstrap/scss/bootstrap";
 
+
+// Beispiel für die Anpassung einer Bootstrap-Variable
+$primary: #ff5733;
 
 // Eigene Styles
 /* Custom CSS for handling submenus */
@@ -36,16 +36,20 @@ $primary: #ff5733;
 	background-color: #f8f9fa;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 569px) {
 	#offcanvasSearch {
 		width: 33.33% !important;
 		/* 1/3 der Breite auf Desktop */
 	}
 }
 
-@media (max-width: 768px) {
+@media (max-width: 568px) {
 	#offcanvasSearch {
 		width: 100% !important;
 		/* Volle Breite auf mobilen Geräten */
 	}
 }
+
+
+// Restliche Bootstrap-Komponenten importieren
+@import "node_modules/bootstrap/scss/bootstrap";
