@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap-Styling
-import BlogIcon from '../images/icons/floppy2-fill.svg'; // SVG Icon
+import BlogIcon from '../images/icons/file-earmark-text-fill.svg'; // SVG Icon
+import SiteIcon from '../images/icons/floppy2-fill.svg'; // SVG Icon
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Für Offcanvas-Funktionalität
 
 const Layout = ({ pageTitle, children }) => {
@@ -67,7 +68,7 @@ const Layout = ({ pageTitle, children }) => {
         <div className="container-fluid">
           {/* Brand Name with Icon */}
           <Link className="navbar-brand d-flex align-items-center" to="/">
-            <img src={BlogIcon} alt="Site icon" width="30" height="30" className="d-inline-block align-text-top me-2" />
+            <img src={SiteIcon} alt="Site icon" width="30" height="30" className="d-inline-block align-text-top me-2" />
             {data.site.siteMetadata.title}
           </Link>
 

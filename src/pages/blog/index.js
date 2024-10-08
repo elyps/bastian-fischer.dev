@@ -86,57 +86,59 @@ const BlogPage = ({ data }) => {
           const { categories, tags, author } = node.frontmatter;
 
           return (
-            <div className="card mb-4 shadow-sm d-flex flex-row align-items-center" key={node.id}>
+            <div className="card mb-4 shadow-sm d-flex flex-row align-items-center" key={node.id} style={{ borderRadius: '10px', overflow: 'hidden' }}>
               {/* Anstatt des Cover-Bildes wird ein SVG-Icon verwendet */}
-              <div className="card-img-left">
-                <img src={BlogIcon} alt="Blog post icon" style={{ width: '100px', height: '100px' }} />
+              <div className="card-img-left" style={{ margin: '10px' }}>
+                <img src={BlogIcon} alt="Blog post icon" style={{ width: '50px', height: '50px' }} />
               </div>
 
               <div className="card-body">
                 {/* Titel des Blogposts */}
                 <h5 className="card-title">
-                  <Link to={`/blog/${node.frontmatter.slug}`}>{node.frontmatter.title}</Link>
+                  <Link to={`/blog/${node.frontmatter.slug}`} className="text-dark" style={{ fontWeight: 'bold', textDecoration: 'none' }}>
+                    {node.frontmatter.title}
+                  </Link>
                 </h5>
 
                 {/* Veröffentlichungsdatum */}
-                <p className="card-text">
+                <p className="card-text mb-1">
                   <small className="text-muted">Posted: {node.frontmatter.date}</small>
                 </p>
 
                 {/* Autor anzeigen */}
-                <div className="author-info mb-3">
+                <p className="card-text mb-1">
                   <strong>Autor: </strong> {author}
-                </div>
+                </p>
 
                 {/* Kategorien */}
-                <div>
+                <p className="card-text mb-1">
                   <strong>Kategorien: </strong>
                   {categories &&
                     categories.map((category, index) => (
                       <Link
-                        to={`/categories/${category.toLowerCase().replace(/\s+/g, '')}`}
+                        to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
                         key={index}
                         className="badge bg-secondary me-1"
                       >
                         {category}
                       </Link>
                     ))}
-                </div>
+                </p>
 
                 {/* Tags */}
-                <div>
+                <p className="card-text mb-1">
                   <strong>Tags: </strong>
                   {tags &&
                     tags.map((tag, index) => (
                       <Link
-                        to={`/tags/${tag.toLowerCase().replace(/\s+/g, '')}`}
+                        to={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
                         key={index}
                         className="badge bg-primary me-1"
                       >
                         {tag}
                       </Link>
                     ))}
-                </div>
+                </p>
               </div>
             </div>
           );
