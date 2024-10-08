@@ -29,7 +29,7 @@
 		"clean": "gatsby clean",
 		"clean:cache": "gatsby clean --cache",
 		"clean:public": "gatsby clean --public",
-		"clean:develop": "gatsby clean && gatsby develop"
+		"clean:develop": "gatsby clean --cache && gatsby clean --public && gatsby develop"
 	},
 	"dependencies": {
 		"@mdx-js/react": "^2.3.0",
@@ -46,5 +46,12 @@
 		"react-bootstrap": "^2.10.5",
 		"react-dom": "^18.2.0",
 		"sass": "^1.79.4"
+	},
+	"devDependencies": {
+		"@babel/preset-env": "^7.25.7",
+		"@babel/preset-react": "^7.25.7",
+		"babel-eslint": "^10.1.0",
+		"eslint": "^7.32.0",
+		"eslint-plugin-react": "^7.37.1"
 	}
 }

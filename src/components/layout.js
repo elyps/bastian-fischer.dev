@@ -84,45 +84,52 @@ const Layout = ({ pageTitle, children }) => {
                 <Link className="nav-link" to="/about">About</Link>
               </li>
 
-              {/* Blog Dropdown Menu */}
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Blog
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><Link className="dropdown-item" to="/blog">All Posts</Link></li>
-                  
-                  {/* Kategorien Übersicht Link */}
-                  <li><Link className="dropdown-item" to="/categories">All Categories</Link></li>
-                  <li className="dropdown-submenu">
-                    <a className="dropdown-item dropdown-toggle" href="#">Categories</a>
-                    <ul className="dropdown-menu">
-                      {/* Dynamische Kategorien */}
-                      {data.allMdx.distinctCategories.map((category, index) => (
-                        <li key={index}>
-                          <Link className="dropdown-item" to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}>
-                            {category}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
+			  {/* Blog Dropdown Menu */}
+			  <li className="nav-item dropdown">
+			    <button 
+			      className="nav-link dropdown-toggle btn"  // Verwende btn-Klasse, um es wie einen Link aussehen zu lassen
+			      id="navbarDropdown" 
+			      data-bs-toggle="dropdown" 
+			      aria-expanded="false"
+			    >
+			      Blog
+			    </button>
+			    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+			      <li><Link className="dropdown-item" to="/blog">All Posts</Link></li>
+			      
+			      {/* Kategorien Übersicht Link */}
+			      <li><Link className="dropdown-item" to="/categories">All Categories</Link></li>
+			      <li className="dropdown-submenu">
+			        <button className="dropdown-item dropdown-toggle btn">Categories</button>
+			        <ul className="dropdown-menu">
+			          {/* Dynamische Kategorien */}
+			          {data.allMdx.distinctCategories.map((category, index) => (
+			            <li key={index}>
+			              <Link className="dropdown-item" to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}>
+			                {category}
+			              </Link>
+			            </li>
+			          ))}
+			        </ul>
+			      </li>
 
-                  {/* Tags Übersicht Link */}
-                  <li><Link className="dropdown-item" to="/tags">All Tags</Link></li>
-                  <li className="dropdown-submenu">
-                    <a className="dropdown-item dropdown-toggle" href="#">Tags</a>
-                    <ul className="dropdown-menu">
-                      {/* Dynamische Tags */}
-                      {data.allMdx.distinctTags.map((tag, index) => (
-                        <li key={index}>
-                          <Link className="dropdown-item" to={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}>
-                            {tag}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
+			      {/* Tags Übersicht Link */}
+			      <li><Link className="dropdown-item" to="/tags">All Tags</Link></li>
+			      <li className="dropdown-submenu">
+			        <button className="dropdown-item dropdown-toggle btn">Tags</button>
+			        <ul className="dropdown-menu">
+			          {/* Dynamische Tags */}
+			          {data.allMdx.distinctTags.map((tag, index) => (
+			            <li key={index}>
+			              <Link className="dropdown-item" to={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}>
+			                {tag}
+			              </Link>
+			            </li>
+			          ))}
+			        </ul>
+			      </li>
+	
+
                 </ul>
               </li>
 
