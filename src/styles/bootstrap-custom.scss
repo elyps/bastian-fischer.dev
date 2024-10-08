@@ -9,3 +9,22 @@ $primary: #ff5733;
 
 // Restliche Bootstrap-Komponenten importieren
 @import "node_modules/bootstrap/scss/bootstrap";
+
+
+// Eigene Styles
+/* Custom CSS for handling submenus */
+.dropdown-submenu .dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin-top: -1px;
+}
+
+.dropdown-submenu.show .dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
