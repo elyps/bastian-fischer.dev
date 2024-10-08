@@ -1,22 +1,17 @@
 import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap-Styling
-import BlogIcon from '../images/icons/file-earmark-text-fill.svg'; // SVG Icon
-import SiteIcon from '../images/icons/floppy2-fill.svg'; // SVG Icon
+import BlogIcon from '../images/icons/file-earmark-text-fill.svg'; // Blog Icon
+import SiteIcon from '../images/icons/floppy2-fill.svg'; // Site Icon
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Für Offcanvas-Funktionalität
 
 const Layout = ({ pageTitle, children }) => {
-  // Zustand für die Suchanfrage und Offcanvas-Sichtbarkeit
-  const searchState = React.useState('');
-  const filteredPostsState = React.useState([]);
-  const offcanvasVisibleState = React.useState(false);
-
-  const searchQuery = searchState[0];      // Der aktuelle Wert der Suchanfrage
-  const setSearchQuery = searchState[1];   // Die Funktion, um die Suchanfrage zu setzen
-  const filteredPosts = filteredPostsState[0];  // Die gefilterten Posts
-  const setFilteredPosts = filteredPostsState[1]; // Funktion, um die gefilterten Posts zu setzen
-  const isOffcanvasVisible = offcanvasVisibleState[0]; // Offcanvas-Sichtbarkeit
-  const setOffcanvasVisible = offcanvasVisibleState[1]; // Funktion, um Offcanvas-Sichtbarkeit zu setzen
+  // Zustand für Light/Dark Mode und Primary Color
+  const [darkMode, setDarkMode] = React.useState(false);
+  const [primaryColor, setPrimaryColor] = React.useState('#0d6efd'); // Default Primary
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [filteredPosts, setFilteredPosts] = React.useState([]);
+  const [isOffcanvasVisible, setOffcanvasVisible] = React.useState(false);
 
   // Dynamische GraphQL-Abfrage
   const data = useStaticQuery(graphql`
@@ -43,15 +38,33 @@ const Layout = ({ pageTitle, children }) => {
     }
   `);
 
+  // Beim Laden des Layouts: Dark Mode & Primary Color aus Local Storage laden
+  React.useEffect(() => {
+    const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+    const storedPrimaryColor = localStorage.getItem('primaryColor');
+    
+    if (storedDarkMode !== null) setDarkMode(storedDarkMode);
+    if (storedPrimaryColor) setPrimaryColor(storedPrimaryColor);
+  }, []);
+
+  // Dark Mode Umschalten
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem('darkMode', !darkMode);
+  };
+
+  // Primary Color ändern
+  const handleColorChange = (color) => {
+    setPrimaryColor(color);
+    localStorage.setItem('primaryColor', color);
+  };
+
   // Event-Handler für die Suche
   const handleSearch = (event) => {
     event.preventDefault();
-    
-    // Filtern der Blogposts basierend auf der Suchanfrage
     const filtered = data.allMdx.nodes.filter(post =>
       post.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    
     setFilteredPosts(filtered);  // Setze die gefilterten Posts
     setOffcanvasVisible(true);   // Zeige das Offcanvas nach der Suche an
   };
@@ -62,9 +75,9 @@ const Layout = ({ pageTitle, children }) => {
   };
 
   return (
-    <div>
+    <div className={`d-flex flex-column ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`} style={{ minHeight: '100vh' }}>
       {/* Bootstrap Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
         <div className="container-fluid">
           {/* Brand Name with Icon */}
           <Link className="navbar-brand d-flex align-items-center" to="/">
@@ -92,54 +105,35 @@ const Layout = ({ pageTitle, children }) => {
 
               {/* Blog Dropdown Menu */}
               <li className="nav-item dropdown">
-                <button
-                  className="nav-link dropdown-toggle btn"  // Verwende btn-Klasse, um es wie einen Link aussehen zu lassen
-                  id="navbarDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Blog
-                </button>
+                <button className="nav-link dropdown-toggle btn" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Blog</button>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><Link className="dropdown-item" to="/blog">All Posts</Link></li>
-
-                  {/* Kategorien Übersicht Link */}
                   <li><Link className="dropdown-item" to="/categories">All Categories</Link></li>
-                  <li className="dropdown-submenu">
-                    <button className="dropdown-item dropdown-toggle btn">Categories</button>
-                    <ul className="dropdown-menu">
-                      {/* Dynamische Kategorien */}
-                      {data.allMdx.distinctCategories.map((category, index) => (
-                        <li key={index}>
-                          <Link className="dropdown-item" to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}>
-                            {category}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-
-                  {/* Tags Übersicht Link */}
                   <li><Link className="dropdown-item" to="/tags">All Tags</Link></li>
-                  <li className="dropdown-submenu">
-                    <button className="dropdown-item dropdown-toggle btn">Tags</button>
-                    <ul className="dropdown-menu">
-                      {/* Dynamische Tags */}
-                      {data.allMdx.distinctTags.map((tag, index) => (
-                        <li key={index}>
-                          <Link className="dropdown-item" to={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}>
-                            {tag}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
                 </ul>
               </li>
 
               {/* Contact Link */}
               <li className="nav-item">
                 <Link className="nav-link" to="/contact">Contact</Link>
+              </li>
+
+              {/* Light/Dark Mode Switch */}
+              <li className="nav-item">
+                <button className="btn btn-outline-secondary ms-3" onClick={toggleDarkMode}>
+                  {darkMode ? 'Light Mode' : 'Dark Mode'}
+                </button>
+              </li>
+
+              {/* Primary Color Switcher */}
+              <li className="nav-item dropdown">
+                <button className="nav-link dropdown-toggle btn" id="primaryColorDropdown" data-bs-toggle="dropdown" aria-expanded="false">Theme Color</button>
+                <ul className="dropdown-menu" aria-labelledby="primaryColorDropdown">
+                  <li><button className="dropdown-item" onClick={() => handleColorChange('#0d6efd')}>Blue</button></li>
+                  <li><button className="dropdown-item" onClick={() => handleColorChange('#dc3545')}>Red</button></li>
+                  <li><button className="dropdown-item" onClick={() => handleColorChange('#198754')}>Green</button></li>
+                  <li><button className="dropdown-item" onClick={() => handleColorChange('#ffc107')}>Yellow</button></li>
+                </ul>
               </li>
             </ul>
 
@@ -151,24 +145,29 @@ const Layout = ({ pageTitle, children }) => {
                 placeholder="Search"
                 aria-label="Search"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)} // Aktualisiere den Zustand mit der Suchanfrage
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{ borderColor: primaryColor }} // Primärfarbe anwenden
               />
-              <button className="btn btn-outline-success" type="submit">Search</button>
+              <button className="btn" style={{ backgroundColor: primaryColor, color: 'white' }} type="submit">Search</button>
             </form>
           </div>
         </div>
       </nav>
 
       {/* Main Content */}
-      <main className="container mt-4">
+      <main className="container flex-grow-1 mt-4">
         {/* Icon vor dem Titel */}
         <div className="d-flex align-items-center mb-3">
           <img src={BlogIcon} alt="Page icon" width="50" height="50" className="me-3" />
           <h1>{pageTitle}</h1>
         </div>
-
         {children}
       </main>
+
+      {/* Footer */}
+      <footer className="bg-light text-center py-3 mt-auto">
+        <p>&copy; {new Date().getFullYear()} - Your Website</p>
+      </footer>
 
       {/* Offcanvas Sidebar für Suchergebnisse */}
       <div className={`offcanvas offcanvas-end ${isOffcanvasVisible ? 'show' : ''}`} tabIndex="-1" id="offcanvasSearch"
