@@ -26,7 +26,10 @@
 		"start": "gatsby develop",
 		"build": "gatsby build",
 		"serve": "gatsby serve",
-		"clean": "gatsby clean"
+		"clean": "gatsby clean",
+		"clean:cache": "gatsby clean --cache",
+		"clean:public": "gatsby clean --public",
+		"clean:develop": "gatsby clean && gatsby develop"
 	},
 	"dependencies": {
 		"@mdx-js/react": "^2.3.0",

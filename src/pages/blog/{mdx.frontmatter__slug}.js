@@ -1,15 +1,31 @@
 import * as React from 'react'
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const BlogPost = ({ data, children }) => {
 	const image = getImage(data.mdx.frontmatter.hero_image)
-
+	const { categories, tags } = data.mdx.frontmatter
 	return (
 		<Layout pageTitle={data.mdx.frontmatter.title}>
 			<p>{data.mdx.frontmatter.date}</p>
+			<div>
+				<strong>Kategorien: </strong>
+				{categories.map((category, index) => (
+					<Link to={`/categories/${category.toLowerCase()}`} key={index}>
+						{category}
+					</Link>
+				))}
+			</div>
+			<div>
+				<strong>Tags: </strong>
+				{tags.map((tag, index) => (
+					<Link to={`/tags/${tag.toLowerCase()}`} key={index}>
+						{tag}
+					</Link>
+				))}
+			</div>
 			<GatsbyImage
 				image={image}
 				alt={data.mdx.frontmatter.hero_image_alt}
@@ -39,6 +55,8 @@ export const query = graphql`
             gatsbyImageData
           }
         }
+		categories
+		tags
       }
     }
   }
