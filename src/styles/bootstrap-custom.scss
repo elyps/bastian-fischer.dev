@@ -50,6 +50,16 @@ $primary: #ff5733;
 	}
 }
 
+:root {
+  --primary-color: #0d6efd; /* Fallback Farbe */
+}
+
+/* Angewendet auf SVGs */
+svg {
+  fill: var(--primary-color);
+}
+
+
 
 // Restliche Bootstrap-Komponenten importieren
 @import "node_modules/bootstrap/scss/bootstrap";

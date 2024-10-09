@@ -3,7 +3,8 @@
 
 import "./src/styles/bootstrap-custom.scss";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
+import React from 'react';
+import { ThemeProvider } from './src/components/ThemeContext'; // Der Pfad zur ThemeContext-Datei
 
 export const onClientEntry = () => {
   if (process.env.NODE_ENV === "development") {
@@ -13,3 +14,10 @@ export const onClientEntry = () => {
     document.head.appendChild(script);
   }
 };
+
+// Wrap the entire app with ThemeProvider
+export const wrapRootElement = ({ element }) => (
+  <ThemeProvider>
+    {element}
+  </ThemeProvider>
+);
