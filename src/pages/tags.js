@@ -24,7 +24,7 @@ const TagsPage = ({ data }) => {
 export const query = graphql`
   query {
     allMdx {
-      distinctTags: distinct(field: frontmatter___tags)
+      distinctTags: distinct(field: {frontmatter: {tags: SELECT}})
     }
   }
 `;

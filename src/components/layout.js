@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 
-import BlogIcon from '../images/icons/file-earmark-text-fill.svg'; // Blog Icon as React Component
+import MainIcon from '../images/icons/floppy2-fill.svg'; // Main Icon as React Component
+import BlogIcon from '../images/icons/body-text.svg'; // Blog Icon as React Component
+import ProjectIcon from '../images/icons/regex.svg'; // Beispiel-Icon für Projekte
 import SiteIcon from '../images/icons/floppy2-fill.svg'; // Site Icon as React Component
-import CardIcon from '../images/icons/filetype-js.svg'; // Card Icon as React Component
+//import CardIcon from '../images/icons/filetype-js.svg'; // Card Icon as React Component
 import SearchIcon from '../images/icons/search-heart-fill.svg'; // Such-Icon als SVG
 import LightModeIcon from '../images/icons/sun-fill.svg'; // Beispiel für Light Mode
 import DarkModeIcon from '../images/icons/moon-stars-fill.svg'; // Beispiel für Dark Mode
@@ -15,8 +17,11 @@ const Layout = ({ pageTitle, children }) => {
 	// Zustand für Light/Dark Mode und Primary Color
 	//const [darkMode, setDarkMode] = React.useState(false);
 	//const [primaryColor, setPrimaryColor] = React.useState('#0d6efd'); // Default Primary
+
 	const [searchQuery, setSearchQuery] = React.useState('');
-	const [filteredPosts, setFilteredPosts] = React.useState([]);
+	const [searchType, setSearchType] = React.useState('both'); // 'posts', 'projects', 'both'
+
+	const [filteredResults, setFilteredResults] = React.useState([]);
 	const [isOffcanvasVisible, setOffcanvasVisible] = React.useState(false);
 
 	const { darkMode, toggleDarkMode, primaryColor, changePrimaryColor } = useTheme();
@@ -39,6 +44,9 @@ const Layout = ({ pageTitle, children }) => {
             tags
             author
           }
+		  internal {
+	        contentFilePath  # Hier wird überprüft, ob der Dateipfad vorhanden ist
+	      }
         }
         distinctCategories: distinct(field: {frontmatter: {categories: SELECT}})
         distinctTags: distinct(field: {frontmatter: {tags: SELECT}})
@@ -67,15 +75,32 @@ const Layout = ({ pageTitle, children }) => {
 	//		localStorage.setItem('primaryColor', color);
 	//	};
 
-	// Event-Handler für die Suche
+	// Filter-Handler
 	const handleSearch = (event) => {
 		event.preventDefault();
-		const filtered = data.allMdx.nodes.filter(post =>
-			post.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase())
-		);
-		setFilteredPosts(filtered);  // Setze die gefilterten Posts
-		setOffcanvasVisible(true);   // Zeige das Offcanvas nach der Suche an
+
+		let filtered = [];
+
+		// Filter basierend auf der Suchart
+		if (searchType === 'posts' || searchType === 'both') {
+			const blogPosts = data.allMdx.nodes.filter((post) =>
+				post.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+				post.internal?.contentFilePath?.includes('/blog/')  // Überprüfe, ob contentFilePath existiert
+			);
+			filtered = [...filtered, ...blogPosts];
+		}
+
+		if (searchType === 'projects' || searchType === 'both') {
+			const projects = data.allMdx.nodes.filter((project) =>
+				project.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+				project.internal?.contentFilePath?.includes('/projects/')  // Überprüfe, ob contentFilePath existiert
+			);
+			filtered = [...filtered, ...projects];
+		}
+
+		setFilteredResults(filtered);  // Setze die gefilterten Ergebnisse
 	};
+
 
 	// Offcanvas schließen
 	const closeOffcanvas = () => {
@@ -113,11 +138,21 @@ const Layout = ({ pageTitle, children }) => {
 
 							{/* Blog Dropdown Menu */}
 							<li className="nav-item dropdown">
-								<button className="nav-link dropdown-toggle btn" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Blog</button>
-								<ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+								<button className="nav-link dropdown-toggle btn" id="navbarDropdownBlog" data-bs-toggle="dropdown" aria-expanded="false">Blog</button>
+								<ul className="dropdown-menu" aria-labelledby="navbarDropdownBlog">
 									<li><Link className="dropdown-item" to="/blog">All Posts</Link></li>
 									<li><Link className="dropdown-item" to="/categories">All Categories</Link></li>
 									<li><Link className="dropdown-item" to="/tags">All Tags</Link></li>
+								</ul>
+							</li>
+
+							{/* Projects Dropdown Menu */}
+							<li className="nav-item dropdown">
+								<button className="nav-link dropdown-toggle btn" id="navbarDropdownProjects" data-bs-toggle="dropdown" aria-expanded="false">Projects</button>
+								<ul className="dropdown-menu" aria-labelledby="navbarDropdownProjects">
+									<li><Link className="dropdown-item" to="/projects">All Projects</Link></li>
+									{/*<li><Link className="dropdown-item" to="/categories">All Categories</Link></li>
+									<li><Link className="dropdown-item" to="/tags">All Tags</Link></li>*/}
 								</ul>
 							</li>
 
@@ -138,43 +173,43 @@ const Layout = ({ pageTitle, children }) => {
 
 							{/* Primary Color Switcher */}
 							<li className="nav-item dropdown ms-3">
-							  {/* Aktuelle Primärfarbe als Icon */}
-							  <ColorSwitcherIcon style={{ fill: primaryColor, width: '40px', height: '40px' }} className="nav-link dropdown-toggle btn" id="primaryColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" />
-							  
-							  {/* Dropdown Menu */}
-							  <ul className="dropdown-menu" aria-labelledby="primaryColorDropdown">
-							    {/* Blue */}
-							    <li>
-							      <button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#0d6efd')}>
-							        <span style={{ backgroundColor: '#0d6efd', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
-							        Blue
-							      </button>
-							    </li>
+								{/* Aktuelle Primärfarbe als Icon */}
+								<ColorSwitcherIcon style={{ fill: primaryColor, width: '40px', height: '40px' }} className="nav-link dropdown-toggle btn" id="primaryColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" />
 
-							    {/* Red */}
-							    <li>
-							      <button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#dc3545')}>
-							        <span style={{ backgroundColor: '#dc3545', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
-							        Red
-							      </button>
-							    </li>
+								{/* Dropdown Menu */}
+								<ul className="dropdown-menu" aria-labelledby="primaryColorDropdown">
+									{/* Blue */}
+									<li>
+										<button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#0d6efd')}>
+											<span style={{ backgroundColor: '#0d6efd', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
+											Blue
+										</button>
+									</li>
 
-							    {/* Green */}
-							    <li>
-							      <button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#198754')}>
-							        <span style={{ backgroundColor: '#198754', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
-							        Green
-							      </button>
-							    </li>
+									{/* Red */}
+									<li>
+										<button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#dc3545')}>
+											<span style={{ backgroundColor: '#dc3545', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
+											Red
+										</button>
+									</li>
 
-							    {/* Yellow */}
-							    <li>
-							      <button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#ffc107')}>
-							        <span style={{ backgroundColor: '#ffc107', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
-							        Yellow
-							      </button>
-							    </li>
-							  </ul>
+									{/* Green */}
+									<li>
+										<button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#198754')}>
+											<span style={{ backgroundColor: '#198754', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
+											Green
+										</button>
+									</li>
+
+									{/* Yellow */}
+									<li>
+										<button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#ffc107')}>
+											<span style={{ backgroundColor: '#ffc107', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
+											Yellow
+										</button>
+									</li>
+								</ul>
 							</li>
 
 						</ul>
@@ -191,7 +226,7 @@ const Layout = ({ pageTitle, children }) => {
 			<main className="container flex-grow-1 mt-4">
 				{/* Icon vor dem Titel */}
 				<div className="d-flex align-items-center mb-3">
-					<BlogIcon style={{ fill: primaryColor, width: '50px', height: '50px' }} className="me-3" />
+					<MainIcon style={{ fill: primaryColor, width: '50px', height: '50px' }} className="me-3" />
 					<h1>{pageTitle}</h1>
 				</div>
 				{children}
@@ -199,7 +234,7 @@ const Layout = ({ pageTitle, children }) => {
 
 			{/* Footer */}
 			<footer className="bg-light text-center py-3 mt-auto">
-				<p>&copy; {new Date().getFullYear()} - Your Website</p>
+				<p>&copy; {new Date().getFullYear()} - bastian-fischer.dev</p>
 			</footer>
 
 			{/* Offcanvas Sidebar für Suchergebnisse */}
@@ -212,15 +247,25 @@ const Layout = ({ pageTitle, children }) => {
 
 				{/* Suchfeld im Offcanvas */}
 				<div className="offcanvas-body">
+					{/* Suchformular */}
 					<form className="d-flex mb-3" onSubmit={handleSearch}>
 						<input
 							className="form-control me-2"
 							type="search"
-							placeholder="Search posts..."
+							placeholder="Search posts or projects..."
 							aria-label="Search"
 							value={searchQuery}
-							onChange={(e) => setSearchQuery(e.target.value)} // Aktualisiere den Zustand mit der Suchanfrage
+							onChange={(e) => setSearchQuery(e.target.value)} // Suchanfrage aktualisieren
 						/>
+						<select
+							className="form-select me-2 w-25"
+							value={searchType}
+							onChange={(e) => setSearchType(e.target.value)} // Suchtyp auswählen
+						>
+							<option value="both">Both</option>
+							<option value="posts">Posts</option>
+							<option value="projects">Projects</option>
+						</select>
 						<button
 							className="btn w-25 ms-3 me-3 text-uppercase"
 							style={{
@@ -228,48 +273,55 @@ const Layout = ({ pageTitle, children }) => {
 								color: '#fff', // Textfarbe auf Weiß
 								border: 'none'
 							}}
-							type="submit">
-								<SearchIcon style={{ fill: '#fff', width: '24px', height: '24px' }} />
-								&emsp;Search
+							type="submit"
+						>
+							Search
 						</button>
 					</form>
 
 					{/* Suchergebnisse */}
-					{filteredPosts.length > 0 ? (
+					{filteredResults.length > 0 ? (
 						<div>
-							{filteredPosts.map(post => (
-								<div className="card mb-3 shadow-sm border-0" key={post.frontmatter.slug} style={{ borderRadius: '10px', overflow: 'hidden' }}>
-									<div className="d-flex align-items-center">
-										{/* Icon für den Post */}
-										<CardIcon style={{ fill: primaryColor, width: '50px', height: '50px' }} className="ms-3" />
-										{/* Inhalt des Posts */}
-										<div className="card-body">
-											<h5 className="card-title">
-												<Link to={`/blog/${post.frontmatter.slug}`} className="text-dark" style={{ fontWeight: 'bold', textDecoration: 'none' }}>
-													{post.frontmatter.title}
-												</Link>
-											</h5>
-											<p className="card-text mb-1">
-												<small className="text-muted">Posted: {post.frontmatter.date}</small>
-											</p>
-											<p className="card-text mb-1">
-												<strong>Kategorien: </strong>{post.frontmatter.categories.join(', ')}
-											</p>
-											<p className="card-text mb-1">
-												<strong>Tags: </strong>{post.frontmatter.tags.join(', ')}
-											</p>
-											{/*<p className="card-text mb-1">
-												<strong>Author: </strong>{post.frontmatter.author}
-											</p>*/}
+							{filteredResults.map((result) => {
+								const isBlogPost = result.internal.contentFilePath.includes('/blog/');
+								//const isProject = result.internal.contentFilePath.includes('/projects/');
+								return (
+									<div className="card mb-3 shadow-sm border-0" key={result.frontmatter.slug} style={{ borderRadius: '10px', overflow: 'hidden' }}>
+										<div className="d-flex align-items-center">
+											{/* Icon für Blogposts oder Projekte */}
+											{isBlogPost ? (
+												<BlogIcon style={{ fill: primaryColor, width: '50px', height: '50px' }} className="ms-3" />
+											) : (
+												<ProjectIcon style={{ fill: primaryColor, width: '50px', height: '50px' }} className="ms-3" />
+											)}
+
+											{/* Inhalt des Blogposts/Projekts */}
+											<div className="card-body">
+												<h5 className="card-title">
+													<Link to={isBlogPost ? `/blog/${result.frontmatter.slug}` : `/projects/${result.frontmatter.slug}`} className="text-dark" style={{ fontWeight: 'bold', textDecoration: 'none' }}>
+														{result.frontmatter.title}
+													</Link>
+												</h5>
+												<p className="card-text mb-1">
+													<small className="text-muted">Posted: {result.frontmatter.date}</small>
+												</p>
+												<p className="card-text mb-1">
+													<strong>Kategorien: </strong>{result.frontmatter.categories.join(', ')}
+												</p>
+												<p className="card-text mb-1">
+													<strong>Tags: </strong>{result.frontmatter.tags.join(', ')}
+												</p>
+											</div>
 										</div>
 									</div>
-								</div>
-							))}
+								);
+							})}
 						</div>
 					) : (
-						<p>No posts found for your search.</p>
+						<p>No results found for your search.</p>
 					)}
 				</div>
+
 			</div>
 		</div>
 	);

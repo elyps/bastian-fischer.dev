@@ -2,7 +2,7 @@ import * as React from 'react'; // Keine Destrukturierung beim Import
 import Layout from '../../components/layout';
 import Seo from '../../components/seo';
 import { Link, graphql } from 'gatsby';
-import CardIcon from '../../images/icons/file-earmark-text-fill.svg';
+import CardIcon from '../../images/icons/body-text.svg';
 
 const BlogPage = ({ data }) => {
 	// Verwende useState ohne Destrukturierung
@@ -56,7 +56,7 @@ const BlogPage = ({ data }) => {
 					{allCategories.map((category, index) => (
 						<button
 							key={index}
-							className={`btn btn-outline-secondary me-2 ${selectedCategories.includes(category) ? 'active' : ''
+							className={`btn btn-sm btn-outline-secondary me-2 ${selectedCategories.includes(category) ? 'active' : ''
 								}`}
 							onClick={() => toggleCategory(category)}
 						>
@@ -71,7 +71,7 @@ const BlogPage = ({ data }) => {
 					{allTags.map((tag, index) => (
 						<button
 							key={index}
-							className={`btn btn-outline-primary me-2 ${selectedTags.includes(tag) ? 'active' : ''}`}
+							className={`btn btn-sm btn-outline-primary me-2 ${selectedTags.includes(tag) ? 'active' : ''}`}
 							onClick={() => toggleTag(tag)}
 						>
 							{tag}
@@ -87,7 +87,7 @@ const BlogPage = ({ data }) => {
 						<div className="card mb-4 shadow-sm d-flex flex-row align-items-center" key={node.id} style={{ borderRadius: '10px', overflow: 'hidden' }}>
 							{/* Anstatt des Cover-Bildes wird ein SVG-Icon verwendet */}
 							<div className="card-img-left" style={{ margin: '10px' }}>
-								<CardIcon style={{ fill: 'var(--primary-color)', width: '50px', height: '50px' }} className="me-3" />
+								<CardIcon style={{ fill: 'var(--primary-color)', width: '50px', height: '50px' }} className="ms-3" />
 							</div>
 
 							<div className="card-body">
@@ -148,21 +148,25 @@ const BlogPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMdx(sort: { frontmatter: { date: DESC } }) {
+    allMdx(
+      filter: { internal: { contentFilePath: { regex: "/blog/" } } }  # Filtere nach Blogposts
+      sort: { frontmatter: { date: DESC } }
+    ) {
       nodes {
         frontmatter {
-          date(formatString: "MMMM D, YYYY")
           title
           slug
-          categories
-          tags
-          author
+          date(formatString: "MMMM DD, YYYY")
+          categories  # Stelle sicher, dass Kategorien abgerufen werden
+          tags        # Stelle sicher, dass Tags abgerufen werden
         }
         id
+		excerpt
       }
     }
   }
 `;
+
 
 export const Head = () => <Seo title="My Blog Posts" />;
 
