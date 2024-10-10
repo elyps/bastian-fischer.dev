@@ -1,8 +1,14 @@
 import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
+
 import BlogIcon from '../images/icons/file-earmark-text-fill.svg'; // Blog Icon as React Component
 import SiteIcon from '../images/icons/floppy2-fill.svg'; // Site Icon as React Component
 import CardIcon from '../images/icons/filetype-js.svg'; // Card Icon as React Component
+import SearchIcon from '../images/icons/search-heart-fill.svg'; // Such-Icon als SVG
+import LightModeIcon from '../images/icons/sun-fill.svg'; // Beispiel für Light Mode
+import DarkModeIcon from '../images/icons/moon-stars-fill.svg'; // Beispiel für Dark Mode
+import ColorSwitcherIcon from '../images/icons/palette-fill.svg'; // Beispiel für Primary Color
+
 import { ThemeProvider, useTheme } from './ThemeContext'; // Importiere den ThemeProvider
 
 const Layout = ({ pageTitle, children }) => {
@@ -12,7 +18,7 @@ const Layout = ({ pageTitle, children }) => {
 	const [searchQuery, setSearchQuery] = React.useState('');
 	const [filteredPosts, setFilteredPosts] = React.useState([]);
 	const [isOffcanvasVisible, setOffcanvasVisible] = React.useState(false);
-	
+
 	const { darkMode, toggleDarkMode, primaryColor, changePrimaryColor } = useTheme();
 
 	// Dynamische GraphQL-Abfrage
@@ -41,25 +47,25 @@ const Layout = ({ pageTitle, children }) => {
   `);
 
 	// Beim Laden des Layouts: Dark Mode & Primary Color aus Local Storage laden
-//	React.useEffect(() => {
-//		const storedDarkMode = localStorage.getItem('darkMode') === 'true';
-//		const storedPrimaryColor = localStorage.getItem('primaryColor');
-//
-//		if (storedDarkMode !== null) setDarkMode(storedDarkMode);
-//		if (storedPrimaryColor) setPrimaryColor(storedPrimaryColor);
-//	}, []);
+	//	React.useEffect(() => {
+	//		const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+	//		const storedPrimaryColor = localStorage.getItem('primaryColor');
+	//
+	//		if (storedDarkMode !== null) setDarkMode(storedDarkMode);
+	//		if (storedPrimaryColor) setPrimaryColor(storedPrimaryColor);
+	//	}, []);
 
 	// Dark Mode Umschalten
-//	const toggleDarkMode = () => {
-//		setDarkMode(!darkMode);
-//		localStorage.setItem('darkMode', !darkMode);
-//	};
+	//	const toggleDarkMode = () => {
+	//		setDarkMode(!darkMode);
+	//		localStorage.setItem('darkMode', !darkMode);
+	//	};
 
 	// Primary Color ändern
-//	const handleColorChange = (color) => {
-//		setPrimaryColor(color);
-//		localStorage.setItem('primaryColor', color);
-//	};
+	//	const handleColorChange = (color) => {
+	//		setPrimaryColor(color);
+	//		localStorage.setItem('primaryColor', color);
+	//	};
 
 	// Event-Handler für die Suche
 	const handleSearch = (event) => {
@@ -121,37 +127,62 @@ const Layout = ({ pageTitle, children }) => {
 							</li>
 
 							{/* Light/Dark Mode Switch */}
-							<li className="nav-item">
-								<button className="btn btn-outline-secondary ms-3" onClick={toggleDarkMode}>
-									{darkMode ? 'Light Mode' : 'Dark Mode'}
-								</button>
-							</li>
+							<button className="btn btn-link ms-3" onClick={toggleDarkMode}>
+								{/* Bedingte Anzeige des Icons je nach Modus */}
+								{darkMode ? (
+									<LightModeIcon style={{ fill: '#ffc107', width: '24px', height: '24px' }} />
+								) : (
+									<DarkModeIcon style={{ fill: '#ffc107', width: '24px', height: '24px' }} />
+								)}
+							</button>
 
 							{/* Primary Color Switcher */}
-							<li className="nav-item dropdown">
-								<button className="nav-link dropdown-toggle btn" id="primaryColorDropdown" data-bs-toggle="dropdown" aria-expanded="false">Theme Color</button>
-								<ul className="dropdown-menu" aria-labelledby="primaryColorDropdown">
-									<li><button className="dropdown-item" onClick={() => changePrimaryColor('#0d6efd')}>Blue</button></li>
-									<li><button className="dropdown-item" onClick={() => changePrimaryColor('#dc3545')}>Red</button></li>
-									<li><button className="dropdown-item" onClick={() => changePrimaryColor('#198754')}>Green</button></li>
-									<li><button className="dropdown-item" onClick={() => changePrimaryColor('#ffc107')}>Yellow</button></li>
-								</ul>
+							<li className="nav-item dropdown ms-3">
+							  {/* Aktuelle Primärfarbe als Icon */}
+							  <ColorSwitcherIcon style={{ fill: primaryColor, width: '40px', height: '40px' }} className="nav-link dropdown-toggle btn" id="primaryColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" />
+							  
+							  {/* Dropdown Menu */}
+							  <ul className="dropdown-menu" aria-labelledby="primaryColorDropdown">
+							    {/* Blue */}
+							    <li>
+							      <button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#0d6efd')}>
+							        <span style={{ backgroundColor: '#0d6efd', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
+							        Blue
+							      </button>
+							    </li>
+
+							    {/* Red */}
+							    <li>
+							      <button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#dc3545')}>
+							        <span style={{ backgroundColor: '#dc3545', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
+							        Red
+							      </button>
+							    </li>
+
+							    {/* Green */}
+							    <li>
+							      <button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#198754')}>
+							        <span style={{ backgroundColor: '#198754', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
+							        Green
+							      </button>
+							    </li>
+
+							    {/* Yellow */}
+							    <li>
+							      <button className="dropdown-item d-flex align-items-center" onClick={() => changePrimaryColor('#ffc107')}>
+							        <span style={{ backgroundColor: '#ffc107', width: '15px', height: '15px', borderRadius: '50%', display: 'inline-block', marginRight: '10px' }}></span>
+							        Yellow
+							      </button>
+							    </li>
+							  </ul>
 							</li>
+
 						</ul>
 
-						{/* Search Form */}
-						<form className="d-flex ms-3" onSubmit={handleSearch}>
-							<input
-								className="form-control me-2"
-								type="search"
-								placeholder="Search"
-								aria-label="Search"
-								value={searchQuery}
-								onChange={(e) => setSearchQuery(e.target.value)}
-								style={{ borderColor: primaryColor }} // Primärfarbe anwenden
-							/>
-							<button className="btn" style={{ backgroundColor: primaryColor, color: 'white' }} type="submit">Search</button>
-						</form>
+						{/* Such-Icon-Button in der Navbar */}
+						<button className="btn btn-link ms-3" onClick={() => setOffcanvasVisible(true)}>
+							<SearchIcon style={{ fill: primaryColor, width: '24px', height: '24px' }} />
+						</button>
 					</div>
 				</div>
 			</nav>
@@ -173,12 +204,37 @@ const Layout = ({ pageTitle, children }) => {
 
 			{/* Offcanvas Sidebar für Suchergebnisse */}
 			<div className={`offcanvas offcanvas-end ${isOffcanvasVisible ? 'show' : ''}`} tabIndex="-1" id="offcanvasSearch"
-				style={{ visibility: isOffcanvasVisible ? 'visible' : 'hidden', width: '100%' }}>
+				style={{ visibility: isOffcanvasVisible ? 'visible' : 'hidden' }}>
 				<div className="offcanvas-header">
-					<h5 className="offcanvas-title">Search Results</h5>
+					<h5 className="offcanvas-title">Search</h5>
 					<button type="button" className="btn-close" onClick={closeOffcanvas} aria-label="Close"></button>
 				</div>
+
+				{/* Suchfeld im Offcanvas */}
 				<div className="offcanvas-body">
+					<form className="d-flex mb-3" onSubmit={handleSearch}>
+						<input
+							className="form-control me-2"
+							type="search"
+							placeholder="Search posts..."
+							aria-label="Search"
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)} // Aktualisiere den Zustand mit der Suchanfrage
+						/>
+						<button
+							className="btn w-25 ms-3 me-3 text-uppercase"
+							style={{
+								backgroundColor: 'var(--primary-color)', // Verwende die CSS-Variable
+								color: '#fff', // Textfarbe auf Weiß
+								border: 'none'
+							}}
+							type="submit">
+								<SearchIcon style={{ fill: '#fff', width: '24px', height: '24px' }} />
+								&emsp;Search
+						</button>
+					</form>
+
+					{/* Suchergebnisse */}
 					{filteredPosts.length > 0 ? (
 						<div>
 							{filteredPosts.map(post => (
@@ -202,9 +258,9 @@ const Layout = ({ pageTitle, children }) => {
 											<p className="card-text mb-1">
 												<strong>Tags: </strong>{post.frontmatter.tags.join(', ')}
 											</p>
-											<p className="card-text mb-1">
+											{/*<p className="card-text mb-1">
 												<strong>Author: </strong>{post.frontmatter.author}
-											</p>
+											</p>*/}
 										</div>
 									</div>
 								</div>
@@ -221,9 +277,9 @@ const Layout = ({ pageTitle, children }) => {
 
 // Wrap Layout in ThemeProvider
 export default function WrappedLayout(props) {
-  return (
-    <ThemeProvider>
-      <Layout {...props} />
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider>
+			<Layout {...props} />
+		</ThemeProvider>
+	);
 }

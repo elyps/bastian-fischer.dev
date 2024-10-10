@@ -2,12 +2,9 @@ import * as React from 'react'; // Keine Destrukturierung beim Import
 import Layout from '../../components/layout';
 import Seo from '../../components/seo';
 import { Link, graphql } from 'gatsby';
-import CardIcon from '../../images/icons/filetype-js.svg';
-import { useTheme } from '../../components/ThemeContext'; // Importiere den ThemeContext
+import CardIcon from '../../images/icons/file-earmark-text-fill.svg';
 
 const BlogPage = ({ data }) => {
-	const { primaryColor } = useTheme(); // Hole primaryColor aus dem Context
-
 	// Verwende useState ohne Destrukturierung
 	const tagState = React.useState([]);
 	const categoryState = React.useState([]);
@@ -84,7 +81,7 @@ const BlogPage = ({ data }) => {
 
 				{/* Gefilterte Artikel anzeigen */}
 				{filteredPosts.map((node) => {
-					const { categories, tags, author } = node.frontmatter;
+					const { categories, tags } = node.frontmatter;
 
 					return (
 						<div className="card mb-4 shadow-sm d-flex flex-row align-items-center" key={node.id} style={{ borderRadius: '10px', overflow: 'hidden' }}>
@@ -107,9 +104,9 @@ const BlogPage = ({ data }) => {
 								</p>
 
 								{/* Autor anzeigen */}
-								<p className="card-text mb-1">
+								{/*<p className="card-text mb-1">
 									<strong>Autor: </strong> {author}
-								</p>
+								</p>*/}
 
 								{/* Kategorien */}
 								<p className="card-text mb-1">
