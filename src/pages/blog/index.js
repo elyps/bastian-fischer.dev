@@ -4,6 +4,20 @@ import Seo from '../../components/seo';
 import { Link, graphql } from 'gatsby';
 import CardIcon from '../../images/icons/body-text.svg';
 
+const colorPool = [
+	'#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF',
+	'#FF8F33', '#33FFC1', '#FFC133', '#33A1FF', '#FF5733',
+	'#FFB3B3', '#FF66B3', '#FFB366', '#66FFB3', '#66B3FF',
+	'#3366FF', '#B366FF', '#FF66FF', '#FF3399', '#99FF33',
+	'#6633FF', '#33FF99', '#FF3399', '#66FF99', '#FF9933',
+	'#33CCFF', '#9933FF', '#CCFF33', '#FF3333', '#3333FF',
+];
+
+function getColorForTag(tagName) {
+	const hash = tagName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+	return colorPool[hash % colorPool.length];
+}
+
 const BlogPage = ({ data }) => {
 	// Verwende useState ohne Destrukturierung
 	const tagState = React.useState([]);
@@ -56,8 +70,8 @@ const BlogPage = ({ data }) => {
 					{allCategories.map((category, index) => (
 						<button
 							key={index}
-							className={`btn btn-sm btn-outline-secondary me-2 ${selectedCategories.includes(category) ? 'active' : ''
-								}`}
+							className={`btn btn-sm me-2 ${selectedCategories.includes(category) ? 'active' : ''}`}
+							style={{ backgroundColor: getColorForTag(category), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}
 							onClick={() => toggleCategory(category)}
 						>
 							{category}
@@ -71,7 +85,8 @@ const BlogPage = ({ data }) => {
 					{allTags.map((tag, index) => (
 						<button
 							key={index}
-							className={`btn btn-sm btn-outline-primary me-2 ${selectedTags.includes(tag) ? 'active' : ''}`}
+							className={`btn btn-sm me-2 ${selectedTags.includes(tag) ? 'active' : ''}`}
+							style={{ backgroundColor: getColorForTag(tag), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}
 							onClick={() => toggleTag(tag)}
 						>
 							{tag}
@@ -113,13 +128,9 @@ const BlogPage = ({ data }) => {
 									<strong>Kategorien: </strong>
 									{categories &&
 										categories.map((category, index) => (
-											<Link
-												to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
-												key={index}
-												className="badge bg-secondary me-1"
-											>
+											<span key={index} style={{ backgroundColor: getColorForTag(category), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}>
 												{category}
-											</Link>
+											</span>
 										))}
 								</p>
 
@@ -128,13 +139,9 @@ const BlogPage = ({ data }) => {
 									<strong>Tags: </strong>
 									{tags &&
 										tags.map((tag, index) => (
-											<Link
-												to={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-												key={index}
-												className="badge bg-primary me-1"
-											>
+											<span key={index} style={{ backgroundColor: getColorForTag(tag), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}>
 												{tag}
-											</Link>
+											</span>
 										))}
 								</p>
 							</div>

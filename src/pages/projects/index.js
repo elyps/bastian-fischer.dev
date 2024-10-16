@@ -4,137 +4,143 @@ import Seo from '../../components/seo';
 import { Link, graphql } from 'gatsby';
 import CardIcon from '../../images/icons/regex.svg';
 
+const colorPool = [
+	'#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF',
+	'#FF8F33', '#33FFC1', '#FFC133', '#33A1FF', '#FF5733',
+	'#FFB3B3', '#FF66B3', '#FFB366', '#66FFB3', '#66B3FF',
+	'#3366FF', '#B366FF', '#FF66FF', '#FF3399', '#99FF33',
+	'#6633FF', '#33FF99', '#FF3399', '#66FF99', '#FF9933',
+	'#33CCFF', '#9933FF', '#CCFF33', '#FF3333', '#3333FF',
+];
+
+function getColorForTag(tagName) {
+	const hash = tagName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+	return colorPool[hash % colorPool.length];
+}
+
 const ProjectsPage = ({ data }) => {
-  // Verwende useState ohne Destrukturierung
-  const tagState = React.useState([]);
-  const categoryState = React.useState([]);
+	// Verwende useState ohne Destrukturierung
+	const tagState = React.useState([]);
+	const categoryState = React.useState([]);
 
-  const selectedTags = tagState[0]; // Zugriff auf den aktuellen Wert des Tags-States
-  const setSelectedTags = tagState[1]; // Zugriff auf die Funktion zum Ändern des Tags-States
+	const selectedTags = tagState[0]; // Zugriff auf den aktuellen Wert des Tags-States
+	const setSelectedTags = tagState[1]; // Zugriff auf die Funktion zum Ändern des Tags-States
 
-  const selectedCategories = categoryState[0]; // Zugriff auf den aktuellen Wert des Kategorien-States
-  const setSelectedCategories = categoryState[1]; // Zugriff auf die Funktion zum Ändern des Kategorien-States
+	const selectedCategories = categoryState[0]; // Zugriff auf den aktuellen Wert des Kategorien-States
+	const setSelectedCategories = categoryState[1]; // Zugriff auf die Funktion zum Ändern des Kategorien-States
 
-  // Alle verfügbaren Tags und Kategorien sammeln
-  const allTags = [...new Set(data.allMdx.nodes.flatMap(node => node.frontmatter.tags))];
-  const allCategories = [...new Set(data.allMdx.nodes.flatMap(node => node.frontmatter.categories))];
+	// Alle verfügbaren Tags und Kategorien sammeln
+	const allTags = [...new Set(data.allMdx.nodes.flatMap(node => node.frontmatter.tags))];
+	const allCategories = [...new Set(data.allMdx.nodes.flatMap(node => node.frontmatter.categories))];
 
-  // Handler für die Tag-Filterung
-  const toggleTag = (tag) => {
-    setSelectedTags((prevTags) =>
-      prevTags.includes(tag) ? prevTags.filter((t) => t !== tag) : [...prevTags, tag]
-    );
-  };
+	// Handler für die Tag-Filterung
+	const toggleTag = (tag) => {
+		setSelectedTags((prevTags) =>
+			prevTags.includes(tag) ? prevTags.filter((t) => t !== tag) : [...prevTags, tag]
+		);
+	};
 
-  // Handler für die Kategorie-Filterung
-  const toggleCategory = (category) => {
-    setSelectedCategories((prevCategories) =>
-      prevCategories.includes(category) ? prevCategories.filter((c) => c !== category) : [...prevCategories, category]
-    );
-  };
+	// Handler für die Kategorie-Filterung
+	const toggleCategory = (category) => {
+		setSelectedCategories((prevCategories) =>
+			prevCategories.includes(category) ? prevCategories.filter((c) => c !== category) : [...prevCategories, category]
+		);
+	};
 
-  // Filterfunktion für die Projekte
-  const filteredProjects = data.allMdx.nodes.filter((node) => {
-    const tagMatch = selectedTags.length === 0 || selectedTags.every((tag) => node.frontmatter.tags.includes(tag));
-    const categoryMatch =
-      selectedCategories.length === 0 ||
-      selectedCategories.every((category) => node.frontmatter.categories.includes(category));
-    return tagMatch && categoryMatch;
-  });
+	// Filterfunktion für die Projekte
+	const filteredProjects = data.allMdx.nodes.filter((node) => {
+		const tagMatch = selectedTags.length === 0 || selectedTags.every((tag) => node.frontmatter.tags.includes(tag));
+		const categoryMatch =
+			selectedCategories.length === 0 ||
+			selectedCategories.every((category) => node.frontmatter.categories.includes(category));
+		return tagMatch && categoryMatch;
+	});
 
-  return (
-    <Layout pageTitle="My Projects">
-      <div className="container">
-        {/* Kategorie-Filter Buttons */}
-        <div className="mb-4">
-          <strong>Filter by Category: </strong>
-          {allCategories.map((category, index) => (
-            <button
-              key={index}
-              className={`btn btn-sm btn-outline-secondary me-2 ${
-                selectedCategories.includes(category) ? 'active' : ''
-              }`}
-              onClick={() => toggleCategory(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+	return (
+		<Layout pageTitle="My Projects">
+			<div className="container">
+				{/* Kategorie-Filter Buttons */}
+				<div className="mb-4">
+					<strong>Filter by Category: </strong>
+					{allCategories.map((category, index) => (
+						<button
+							key={index}
+							className={`btn btn-sm me-2 ${selectedCategories.includes(category) ? 'active' : ''}`}
+							style={{ backgroundColor: getColorForTag(category), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}
+							onClick={() => toggleCategory(category)}
+						>
+							{category}
+						</button>
+					))}
+				</div>
 
-        {/* Tag-Filter Buttons */}
-        <div className="mb-4">
-          <strong>Filter by Tag: </strong>
-          {allTags.map((tag, index) => (
-            <button
-              key={index}
-              className={`btn btn-sm btn-outline-primary me-2 ${selectedTags.includes(tag) ? 'active' : ''}`}
-              onClick={() => toggleTag(tag)}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
+				{/* Tag-Filter Buttons */}
+				<div className="mb-4">
+					<strong>Filter by Tag: </strong>
+					{allTags.map((tag, index) => (
+						<button
+							key={index}
+							className={`btn btn-sm me-2 ${selectedTags.includes(tag) ? 'active' : ''}`}
+							style={{ backgroundColor: getColorForTag(tag), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}
+							onClick={() => toggleTag(tag)}
+						>
+							{tag}
+						</button>
+					))}
+				</div>
 
-        {/* Gefilterte Projekte anzeigen */}
-        {filteredProjects.map((node) => {
-          const { categories, tags } = node.frontmatter;
+				{/* Gefilterte Projekte anzeigen */}
+				{filteredProjects.map((node) => {
+					const { categories, tags } = node.frontmatter;
 
-          return (
-            <div className="card mb-4 shadow-sm d-flex flex-row align-items-center" key={node.id} style={{ borderRadius: '10px', overflow: 'hidden' }}>
-              {/* Anstatt des Cover-Bildes wird ein SVG-Icon verwendet */}
-              <div className="card-img-left" style={{ margin: '10px' }}>
-                <CardIcon style={{ fill: 'var(--primary-color)', width: '50px', height: '50px' }} className="ms-3" />
-              </div>
+					return (
+						<div className="card mb-4 shadow-sm d-flex flex-row align-items-center" key={node.id} style={{ borderRadius: '10px', overflow: 'hidden' }}>
+							{/* Anstatt des Cover-Bildes wird ein SVG-Icon verwendet */}
+							<div className="card-img-left" style={{ margin: '10px' }}>
+								<CardIcon style={{ fill: 'var(--primary-color)', width: '50px', height: '50px' }} className="ms-3" />
+							</div>
 
-              <div className="card-body">
-                {/* Titel des Projekts */}
-                <h5 className="card-title">
-                  <Link to={`/projects/${node.frontmatter.slug}`} className="text-dark" style={{ fontWeight: 'bold', textDecoration: 'none' }}>
-                    {node.frontmatter.title}
-                  </Link>
-                </h5>
+							<div className="card-body">
+								{/* Titel des Projekts */}
+								<h5 className="card-title">
+									<Link to={`/projects/${node.frontmatter.slug}`} className="text-dark" style={{ fontWeight: 'bold', textDecoration: 'none' }}>
+										{node.frontmatter.title}
+									</Link>
+								</h5>
 
-                {/* Veröffentlichungsdatum */}
-                <p className="card-text mb-1">
-                  <small className="text-muted">Posted: {node.frontmatter.date}</small>
-                </p>
+								{/* Veröffentlichungsdatum */}
+								<p className="card-text mb-1">
+									<small className="text-muted">Posted: {node.frontmatter.date}</small>
+								</p>
 
-                {/* Kategorien */}
-                <p className="card-text mb-1">
-                  <strong>Kategorien: </strong>
-                  {categories &&
-                    categories.map((category, index) => (
-                      <Link
-                        to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
-                        key={index}
-                        className="badge bg-secondary me-1"
-                      >
-                        {category}
-                      </Link>
-                    ))}
-                </p>
+								{/* Kategorien */}
+								<p className="card-text mb-1">
+									<strong>Kategorien: </strong>
+									{categories &&
+										categories.map((category, index) => (
+											<span key={index} style={{ backgroundColor: getColorForTag(category), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}>
+												{category}
+											</span>
+										))}
+								</p>
 
-                {/* Tags */}
-                <p className="card-text mb-1">
-                  <strong>Tags: </strong>
-                  {tags &&
-                    tags.map((tag, index) => (
-                      <Link
-                        to={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                        key={index}
-                        className="badge bg-primary me-1"
-                      >
-                        {tag}
-                      </Link>
-                    ))}
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </Layout>
-  );
+								{/* Tags */}
+								<p className="card-text mb-1">
+									<strong>Tags: </strong>
+									{tags &&
+										tags.map((tag, index) => (
+											<span key={index} style={{ backgroundColor: getColorForTag(tag), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}>
+												{tag}
+											</span>
+										))}
+								</p>
+							</div>
+						</div>
+					);
+				})}
+			</div>
+		</Layout>
+	);
 };
 
 export const query = graphql`

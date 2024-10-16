@@ -262,7 +262,7 @@ const Layout = ({ pageTitle, children }) => {
 							value={searchType}
 							onChange={(e) => setSearchType(e.target.value)} // Suchtyp auswählen
 						>
-							<option value="both">Both</option>
+							<option value="both">All</option>
 							<option value="posts">Posts</option>
 							<option value="projects">Projects</option>
 						</select>
