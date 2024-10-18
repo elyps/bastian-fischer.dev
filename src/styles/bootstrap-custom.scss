@@ -70,6 +70,101 @@ svg {
 	fill: var(--primary-color);
 }
 
+/* index page */
+/* Global CSS */
+.rectangle-container {
+  position: relative;
+  display: flex;
+  justify-content: center; /* Zentriert horizontal */
+  align-items: center; /* Zentriert vertikal */
+  flex-direction: column; /* Stellt die Boxen untereinander */
+  height: 600px; /* Genügend Platz für die Rechtecke */
+  margin-top: 50px; /* Abstand von der Navbar */
+  overflow: hidden; /* Damit die Rechtecke außerhalb des Containers starten können */
+}
+
+.rectangle {
+  padding: 40px 80px; /* Größere Rechtecke */
+  font-size: 100px; /* Doppelt so große Schrift */
+  font-weight: bold;
+  color: white;
+  background-color: var(--primary-color); /* Primary Color aus deinem Theme */
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute; /* Ermöglicht Versetzung */
+  letter-spacing: 2px;
+  opacity: 0; /* Rechtecke sind unsichtbar bis zur Animation */
+}
+
+.rectangle-1 {
+  background-color: #FF5733; /* Farbe für Box 1 */
+  transform: translateX(-220px); /* Weiter nach links versetzt */
+  animation: slideInLeft 1.5s forwards; /* Kommt von links rein */
+}
+
+.rectangle-2 {
+  background-color: #33A1FF; /* Farbe für Box 2 */
+  padding: 20px 60px; /* Kleineres Rechteck */
+  font-size: 48px; /* Kleinere Schrift für "elyps." */
+  transform: translateY(-120px) translateX(50px); /* Weiter nach oben und leicht nach links versetzt */
+  animation: slideInTop 1.5s forwards 0.5s; /* Kommt von oben rein mit 0.5s Verzögerung */
+}
+
+.rectangle-3 {
+  background-color: #FFC133; /* Farbe für Box 3 */
+  transform: translateY(120px) translateX(220px); /* Weiter nach rechts versetzt */
+  animation: slideInRight 1.5s forwards 1s; /* Kommt von rechts rein mit 1s Verzögerung */
+}
+
+/* Animationen */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100vw); /* Startet von links außerhalb des Bildschirms */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-220px); /* Endet leicht nach links versetzt */
+    opacity: 1;
+  }
+}
+
+@keyframes slideInTop {
+  0% {
+    transform: translateY(-100vh); /* Startet von oben außerhalb des Bildschirms */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-120px) translateX(50px); /* Endet leicht nach oben und links versetzt */
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100vw); /* Startet von rechts außerhalb des Bildschirms */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(120px) translateX(220px); /* Endet leicht nach rechts versetzt */
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Responsive Anpassungen für mobile Geräte */
+  .rectangle-container {
+    height: 600px;
+  }
+
+  .rectangle {
+    padding: 20px 40px;
+    font-size: 28px;
+    transform: none; /* Entfernt Versetzung auf kleinen Bildschirmen */
+    position: relative; /* Ordnet Rechtecke neu */
+  }
+}
+
+
 
 
 // Restliche Bootstrap-Komponenten importieren

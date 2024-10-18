@@ -1,22 +1,21 @@
-import * as React from 'react'
-import Layout from '../components/layout'
-import { StaticImage } from 'gatsby-plugin-image'
-import Seo from '../components/seo'
-import { Button } from "react-bootstrap";
+import * as React from 'react';
+import Layout from '../components/layout';
+import { StaticImage } from 'gatsby-plugin-image';
+import Seo from '../components/seo';
 
 const IndexPage = () => {
-	return (
-		<Layout pageTitle="Home Page">
-			<p>I'm making this by following the Gatsby Tutorial.</p>
-			<Button variant="primary">Click me</Button>
-			<StaticImage
-				alt="cover image"
-				src="../images/cover.jpg"
-			/>
-		</Layout>
-	)
-}
+  return (
+    <Layout pageTitle="Home Page">
+      <div className="rectangle-container">
+        <div className="rectangle rectangle-1">Bastian</div>
+        <div className="rectangle rectangle-2">elyps.</div>
+        <div className="rectangle rectangle-3">Fischer</div>
+      </div>
 
-export const Head = () => <Seo title="Home Page" />
+    </Layout>
+  );
+};
 
-export default IndexPage
+export const Head = () => <Seo title="Home Page" />;
+
+export default IndexPage;
