@@ -128,9 +128,18 @@ const BlogPage = ({ data }) => {
 									<strong>Kategorien: </strong>
 									{categories &&
 										categories.map((category, index) => (
-											<span key={index} style={{ backgroundColor: getColorForTag(category), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}>
-												{category}
-											</span>
+											<button
+												key={index}
+												className="btn btn-sm me-2"
+												style={{ backgroundColor: getColorForTag(category), color: '#fff' }}
+											>
+												<Link
+													to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`} // Kategorie-Link
+													style={{ color: '#fff', textDecoration: 'none' }} // Stellt sicher, dass der Text weiß bleibt
+												>
+													{category}
+												</Link>
+											</button>
 										))}
 								</p>
 
@@ -139,9 +148,18 @@ const BlogPage = ({ data }) => {
 									<strong>Tags: </strong>
 									{tags &&
 										tags.map((tag, index) => (
-											<span key={index} style={{ backgroundColor: getColorForTag(tag), color: '#fff', padding: '0 4px 2px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}>
-												{tag}
-											</span>
+											<button
+												key={index}
+												className="btn btn-sm me-2"
+												style={{ backgroundColor: getColorForTag(tag), color: '#fff' }}
+											>
+												<Link
+													to={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`} // Kategorie-Link
+													style={{ color: '#fff', textDecoration: 'none' }} // Stellt sicher, dass der Text weiß bleibt
+												>
+													{tag}
+												</Link>
+											</button>
 										))}
 								</p>
 							</div>

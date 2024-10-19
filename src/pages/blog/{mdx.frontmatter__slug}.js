@@ -19,7 +19,7 @@ function getColorForTag(tagName) {
 	return colorPool[hash % colorPool.length];
 }
 
-const BlogPost = ({ data, children }) => { 
+const BlogPost = ({ data, children }) => {
 	const image = getImage(data.mdx.frontmatter.hero_image);
 	const { categories, tags } = data.mdx.frontmatter;
 
@@ -34,7 +34,12 @@ const BlogPost = ({ data, children }) => {
 						className="btn btn-sm me-2"
 						style={{ backgroundColor: getColorForTag(category), color: '#fff' }}
 					>
-						{category}
+						<Link
+							to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`} // Kategorie-Link
+							style={{ color: '#fff', textDecoration: 'none' }} // Stellt sicher, dass der Text weiß bleibt
+						>
+							{category}
+						</Link>
 					</button>
 				))}
 			</div>
@@ -46,7 +51,12 @@ const BlogPost = ({ data, children }) => {
 						className="btn btn-sm me-2"
 						style={{ backgroundColor: getColorForTag(tag), color: '#fff' }}
 					>
-						{tag}
+						<Link
+							to={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`} // Tag-Link
+							style={{ color: '#fff', textDecoration: 'none' }} // Stellt sicher, dass der Text weiß bleibt
+						>
+							{tag}
+						</Link>
 					</button>
 				))}
 			</div>

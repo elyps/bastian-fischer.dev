@@ -45,7 +45,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Erstelle dynamische Seiten für Kategorien
   categories.forEach((category) => {
     createPage({
-      path: `/categories/${_.lowerCase(category).replace(/\s+/g, '')}/`,
+      path: `/categories/${_.lowerCase(category).replace(/\s+/g, '-')}/`,
       component: categoryTemplate,
       context: {
         category, // Dies wird im Template verwendet
@@ -56,7 +56,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Erstelle dynamische Seiten für Tags
   tags.forEach((tag) => {
     createPage({
-      path: `/tags/${_.lowerCase(tag).replace(/\s+/g, '')}/`,
+      path: `/tags/${_.lowerCase(tag).replace(/\s+/g, '-')}/`,
       component: tagTemplate,
       context: {
         tag, // Dies wird im Template verwendet

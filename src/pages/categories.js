@@ -23,9 +23,13 @@ const CategoriesPage = ({ data }) => {
 		<Layout pageTitle="Categories">
 			<h2>All Categories</h2>
 			{categories.map((category, index) => (
-				<span key={index} style={{ backgroundColor: getColorForTag(category), color: '#fff', padding: '2px 6px 4px', borderRadius: '5px', marginRight: '5px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '14px' }}>
+				<button
+					key={index}
+					className="btn btn-sm me-2"
+					style={{ backgroundColor: getColorForTag(category), color: '#fff' }}
+				>
 					{category}
-				</span>
+				</button>
 			))}
 		</Layout>
 	);
