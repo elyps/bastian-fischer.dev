@@ -5,7 +5,7 @@ import Seo from '../components/seo';
 
 const IndexPage = () => {
   return (
-    <Layout pageTitle="Home Page">
+    <Layout pageTitle="bastian-fischer.dev">
       <div className="rectangle-container">
         <div className="rectangle rectangle-1">Bastian</div>
         <div className="rectangle rectangle-2">elyps.</div>
@@ -16,6 +16,6 @@ const IndexPage = () => {
   );
 };
 
-export const Head = () => <Seo title="Home Page" />;
+export const Head = () => <Seo title="bastian-fischer.dev" />;
 
 export default IndexPage;
